@@ -48,9 +48,15 @@ log:
     module: activiti-workflow
     logger:
       level: info
+logging:
+  path: d:\\log
+  level:
+    boot:
+      spring:
+        controller: DEBUG
 
 #mybatis
 mybatis:
   config-location: classpath:mybatis-config.xml
   mapper-locations: classpath:mapper/*.xml
-  type-aliases-package: boot.spring.po
+  type-aliases-package: com.activiti6.po

@@ -105,6 +105,7 @@
     <orderEntry type="library" name="Maven: math.geom2d:javaGeom:0.11.1" level="project" />
     <orderEntry type="library" name="Maven: org.activiti:activiti-bpmn-layout:6.0.0" level="project" />
     <orderEntry type="library" name="Maven: org.tinyjee.jgraphx:jgraphx:1.10.4.1" level="project" />
+    <orderEntry type="library" name="Maven: commons-io:commons-io:2.2" level="project" />
     <orderEntry type="library" name="Maven: org.projectlombok:lombok:1.16.22" level="project" />
     <orderEntry type="library" name="Maven: org.apache.xmlgraphics:batik-codec:1.7" level="project" />
     <orderEntry type="library" name="Maven: org.apache.xmlgraphics:batik-awt-util:1.7" level="project" />
@@ -118,7 +119,6 @@
     <orderEntry type="library" name="Maven: org.apache.xmlgraphics:fop:0.94" level="project" />
     <orderEntry type="library" name="Maven: org.apache.xmlgraphics:xmlgraphics-commons:1.2" level="project" />
     <orderEntry type="library" name="Maven: commons-logging:commons-logging:1.0.4" level="project" />
-    <orderEntry type="library" name="Maven: commons-io:commons-io:1.1" level="project" />
     <orderEntry type="library" name="Maven: org.apache.avalon.framework:avalon-framework-api:4.3.1" level="project" />
     <orderEntry type="library" name="Maven: org.apache.avalon.framework:avalon-framework-impl:4.3.1" level="project" />
     <orderEntry type="library" name="Maven: org.apache.xmlgraphics:batik-util:1.7" level="project" />

@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
 @SpringBootApplication( exclude= SecurityAutoConfiguration.class)
-@MapperScan("boot.spring.mapper")
+@MapperScan("com.activiti6.mapper")
 @EnableScheduling
 public class WorkflowApplication {
 
