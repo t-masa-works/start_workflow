@@ -1,0 +1,56 @@
+spring:
+  application:
+    name: activiti-workflow
+  profiles:
+    active: dev
+  #数据源配置
+  datasource:
+    url: jdbc:mysql://localhost:3306/activiti?useUnicode=yes&characterEncoding=UTF-8&useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true&nullCatalogMeansCurrent=true
+    username: activiti
+    password: activiti
+    driverClassName: com.mysql.cj.jdbc.Driver
+    type: com.zaxxer.hikari.HikariDataSource
+    hikari:
+      poolName: Hikari
+      auto-commit: false
+
+  #freemarker模板配置
+  freemarker:
+    suffix: .ftl
+    cache: false
+    charset: UTF-8
+    contentType: text/html
+    requestContextAttribute: ctx
+    templateEncoding: UTF-8
+    templateLoaderPath: classpath:/templates/
+    settings:
+      defaultEncoding: UTF-8
+      url_escaping_charset: UTF-8
+      locale: zh_CN
+  http:
+    activiti:
+      check-process-definitions: false
+  activiti:
+    database-schema-update: true
+  check-process-definitions: true
+  process-definition-location-prefix: classpath:/process/
+  history-level: full
+
+  liquibase:
+    enabled: false
+
+server:
+  port: 8082
+
+log:
+  env:
+    profile: dev
+    module: activiti-workflow
+    logger:
+      level: info
+
+#mybatis
+mybatis:
+  config-location: classpath:mybatis-config.xml
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: boot.spring.po

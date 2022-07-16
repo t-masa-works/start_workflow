@@ -22,6 +22,7 @@
 		<hutool.version>4.2.1</hutool.version>
         <mysql.version>8.0.16</mysql.version>
         <validation.version>2.0.1.Final</validation.version>
+		<apache.xmlgraphics.version>1.7</apache.xmlgraphics.version>
 	</properties>
 
 	<dependencies>
@@ -39,6 +40,15 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-jdbc</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.zaxxer</groupId>
+			<artifactId>HikariCP</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-freemarker</artifactId>
 		</dependency>
 
 		<dependency>
@@ -83,6 +93,26 @@
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.xmlgraphics</groupId>
+			<artifactId>batik-codec</artifactId>
+			<version>${apache.xmlgraphics.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.xmlgraphics</groupId>
+			<artifactId>batik-css</artifactId>
+			<version>${apache.xmlgraphics.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.xmlgraphics</groupId>
+			<artifactId>batik-svg-dom</artifactId>
+			<version>${apache.xmlgraphics.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.xmlgraphics</groupId>
+			<artifactId>batik-svggen</artifactId>
+			<version>${apache.xmlgraphics.version}</version>
 		</dependency>
 
 		<!-- swagger相关依赖 -->
