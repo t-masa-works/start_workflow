@@ -26,7 +26,7 @@
 
 自定义完成的方法，完成时不执行流程事件，使用于流程驳回，撤销操作，参考[CustomTaskCompleteCmd](https://github.com/heartlhj/activiti-workflow/blob/master/src/main/java/com/gogoing/workflow/cmd/CustomTaskCompleteCmd.java)类。
 
-扩展支持节点抄送，通过重写**UserTaskActivityBehavior**的handleAssignments将抄送用户存入数据库。具体修改代码位于[com.gogoing.workflow.bpmn][3]。
+扩展支持节点抄送，通过重写**UserTaskActivityBehavior**的handleAssignments将抄送用户存入数据库。具体修改代码位于[com.activiti6.bpmn][3]。
 
 ```java
 protected void handleAssignments(TaskEntityManager taskEntityManager, String assignee, String owner, List<String> candidateUsers,
