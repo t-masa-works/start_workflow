@@ -16,7 +16,7 @@ spring:
 
   #freemarker模板配置
   freemarker:
-    suffix: .ftl
+    suffix: .html
     cache: false
     charset: UTF-8
     contentType: text/html
