@@ -20,23 +20,37 @@ public class Login {
 	LoginService loginservice;
 	
 	@RequestMapping(value="/loginvalidate",method = RequestMethod.POST)
-	public String loginvalidate(@RequestParam("username") String username,@RequestParam("password") String pwd,HttpSession httpSession){
+	public String loginvalidate(@RequestParam("username") String username,
+								@RequestParam("password") String pwd,
+								@RequestParam("redirecturl") String redirecturl,
+								@RequestParam("fromurl") String fromurl,
+								HttpSession httpSession){
 		if(username==null)
-			return "login";
+			return fromurl;
 		String realpwd=loginservice.getpwdbyname(username);
 		if(realpwd!=null&&pwd.equals(realpwd))
 		{
 			httpSession.setAttribute("username", username);
-			return "index2";
+			return redirecturl;
 		}else
 			return "fail";
 	}
 	
-	@RequestMapping(value="/login",method = RequestMethod.GET)
-	public String login(){
-		return "login";
+	@RequestMapping(value="/login/user_login",method = RequestMethod.GET)
+	public String user_login(){
+		return "login/user_login/index";
 	}
-	
+
+	@RequestMapping(value="/login/system_manager_login",method = RequestMethod.GET)
+	public String system_manager_login(){
+		return "login/system_manager_login/index";
+	}
+
+	@RequestMapping(value="/login/manager_login",method = RequestMethod.GET)
+	public String manager_login(){
+		return "login/manager_login/index";
+	}
+
 	@RequestMapping(value="/logout",method = RequestMethod.GET)
 	public String logout(HttpSession httpSession){
 		httpSession.removeAttribute("username");

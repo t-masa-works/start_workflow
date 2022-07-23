@@ -60,3 +60,15 @@ mybatis:
   config-location: classpath:mybatis-config.xml
   mapper-locations: classpath:mapper/*.xml
   type-aliases-package: com.activiti6.po
+
+mybatis-plus:
+  mapper-locations: classpath*:mapper/*Mapper.xml
+  configuration:
+    map-underscore-to-camel-case: true
+  #逻辑删除配置
+  global-config:
+    logic-delete-value: 1
+    logic-not-delete-value: 0
+  #id自动生成策略
+    db-config:
+      id-type: auto
