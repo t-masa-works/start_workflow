@@ -92,7 +92,7 @@ public class ActivitiController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return "index2";
+		return "system_manager/process_list/index";
 	}
 
 	@RequestMapping(value = "/getprocesslists", method = RequestMethod.POST)
@@ -132,7 +132,7 @@ public class ActivitiController {
 	@RequestMapping(value = "/deletedeploy", method = RequestMethod.POST)
 	public String deletedeploy(@RequestParam("deployid") String deployid) throws Exception {
 		rep.deleteDeployment(deployid, true);
-		return "activiti/processlist";
+		return "system_manager/process_list/index";
 	}
 
 	@RequestMapping(value = "/runningprocess", method = RequestMethod.GET)

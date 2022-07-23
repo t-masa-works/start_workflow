@@ -54,7 +54,7 @@ public class Login {
 	@RequestMapping(value="/logout",method = RequestMethod.GET)
 	public String logout(HttpSession httpSession){
 		httpSession.removeAttribute("username");
-		return "login";
+		return "/";
 	}
 	
 	@RequestMapping(value="/currentuser",method = RequestMethod.GET)

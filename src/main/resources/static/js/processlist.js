@@ -2,7 +2,7 @@
 	  $("#upload").submit(function(){
 	    if($("#fileupload").val()=="")
 	    {
-	    	alert("请选择工作流文件上传");
+	    	alert("Please select workflow file upload");
 	    	return false;
 	    }
 	  });
@@ -15,29 +15,33 @@
 	    rowCount:10,
 	    navigation:2,
 	    columnSelection:false,
-	    url:"getprocesslists",
+	    url:"/getprocesslists",
 	        formatters: {
 	        "commands": function(column, row)
 	        {
-	            return "<button type=\"button\" class=\"btn btn-xs btn-info command-delete\" data-row-id=\"" + row.deploymentId + "\">删除</button>";
+	            return "<button type=\"button\" class=\"btn btn-xs btn-info command-delete\" data-row-id=\"" + row.deploymentId + "\">删除</button>"
+				+"<a class=\"btn btn-xs btn-info command-editor\" href=\"/editor?modelId="+ row.deploymentId +"\">编辑</a>"
+				+ "<button type=\"button\" class=\"btn btn-xs btn-info command-publish\" data-row-id=\"" + row.deploymentId + "\">发布</button>"
+				+ "<button type=\"button\" class=\"btn btn-xs btn-info command-revokePublish\" data-row-id=\"" + row.deploymentId + "\">撤销</button>"
+				;
 	        },
 	        "resname":function(column, row)
 	        {
-	            return "<a target=\"_blank\" href=\"showresource?pdid="+row.id+"&resource="+row.resourceName+"\">"  + row.resourceName + "</a>";
+	            return "<a target=\"_blank\" href=\"/showresource?pdid="+row.id+"&resource="+row.resourceName+"\">"  + row.resourceName + "</a>";
 	        },
 	        "picname":function(column, row)
 	        {
-	        	return "<a target=\"_blank\" href=\"showresource?pdid="+row.id+"&resource="+row.diagramresourcename+"\">"  + row.diagramresourcename + "</a>";
+	        	return "<a target=\"_blank\" href=\"/showresource?pdid="+row.id+"&resource="+row.diagramresourcename+"\">"  + row.diagramresourcename + "</a>";
 	        },
 	    	}
 	    }).on("loaded.rs.jquery.bootgrid", function()
 		{
 		    grid.find(".command-delete").on("click", function(e)
-			    {
-			        $.post("deletedeploy",{deployid:$(this).data("row-id")},function(){
-			        	alert("删除成功");
-			        	$("#grid-data").bootgrid("reload");
-			        });
-			    });
-		    });
-	  });
+			{
+				$.post("/deletedeploy",{deployid:$(this).data("row-id")},function(){
+					alert("删除成功");
+					$("#grid-data").bootgrid("reload");
+				});
+			});
+		});
+	});

@@ -59,9 +59,9 @@ public class ModelerController{
      * 跳转编辑器页面
      * @return
      */
-    @GetMapping("editor")
-    public String editor(){
-        return "modeler";
+    @GetMapping("/editor")
+    public String editor(String modelId){
+		return "system_manager/modeler/index";
     }
 
 	@RequestMapping(value="/login2",method = RequestMethod.GET)
