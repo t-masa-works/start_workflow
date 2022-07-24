@@ -36,7 +36,7 @@ public class UserRegisterServiceImpl implements UserRegisterService{
 		userRegisterInfoMapper.save(userRegisterInfo);
 		String businesskey=String.valueOf(userRegisterInfo.getId());//使用leaveapply表的主键作为businesskey,连接业务数据和流程数据
 		identityservice.setAuthenticatedUserId(userid);
-		ProcessInstance instance=runtimeservice.startProcessInstanceByKey("leave",businesskey,variables);
+		ProcessInstance instance=runtimeservice.startProcessInstanceByKey("userregiste",businesskey,variables);
 		System.out.println(businesskey);
 		String instanceid=instance.getId();
 		userRegisterInfo.setProcess_instance_id(instanceid);
