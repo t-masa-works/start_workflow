@@ -77,9 +77,9 @@ public class ActivitiController {
 	@Autowired
 	SystemService systemservice;
 
-	@RequestMapping(value = "/processlist", method = RequestMethod.GET)
+	@RequestMapping(value = "/system_manager/process_list", method = RequestMethod.GET)
 	String process() {
-		return "activiti/processlist";
+		return "system_manager/process_list/index";
 	}
 
 	@RequestMapping(value = "/uploadworkflow", method = RequestMethod.POST)
