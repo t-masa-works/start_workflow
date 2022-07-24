@@ -212,89 +212,35 @@
 				</div>
 				<div class="box-content">
 					<form role="form" action="startleave" method="post">
-						
 							<div class="form-group">
-								<label>ID</label>
-								 
-									<input id="id" class="form-control" name="ID"/>
-								
+								<label>username</label>
+								<input id="username" class="form-control" name="username"/>
 							</div>
-						
 							<div class="form-group">
-								<label>Name</label>
-								 
-									<input id="name" class="form-control" name="Name"/>
-								
+								<label>password</label>
+								<input id="password" class="form-control" name="password"/>
 							</div>
-						
 							<div class="form-group">
-								<label>Category</label>
-								 
-									<select id="category" name="Category" class="form-control">
-										
-											<option value="b">Watch</option>
-										
-											<option value="p">Picture</option>
-										
-									</select>
-								
+								<label>birthday</label>
+								<input id="birthday" class="form-control" name="birthday"/>
 							</div>
-						
 							<div class="form-group">
-								<label>Unit</label>
-								 
-									<select id="unit" name="Unit" class="form-control">
-										
-											<option value="k">KG</option>
-										
-											<option value="b">Box</option>
-										
-									</select>
-								
+								<label>tel</label>
+								<input id="tel" class="form-control" name="tel"/>
 							</div>
-						
 							<div class="form-group">
-								<label>Price</label>
-								 
-									<input id="price" class="form-control" name="Price"/>
-								
+								<label>mail</label>
+								<input id="mail" class="form-control" name="mail"/>
 							</div>
-						
-							<div class="form-group">
-								<label>Comment</label>
-								 
-									<textarea id="comment" class="form-control" name="Comment" rows="3"></textarea>
-								
-							</div>
-						
-
-						
-							<a href="/user/product/" class="btn btn-primary">Confirm</a>
-						
-							<a href="#" class="btn btn-primary">Reset</a>
-						
-						
+							<button id="userRegisterApply" type="button" class="btn btn-primary">register</button>
+							<button type="reset" class="btn btn-primary">Reset</button>
 					</form>
 				</div>
 			</div>
 		</div>
 	</div>
 </div>
-<script type="text/javascript">
-$(document).ready(function(){
-	$("#btn").click(function(){
-		$.post("startleave",$("form").serialize(),function(){
-			alert("申请成功");
-			LoadAjaxContent("leaveapply");
-		});
-	});
-	
-	$('#start').datepicker({setDate: new Date(), dateFormat: 'yy-mm-dd'});
-	$('#end').datepicker({setDate: new Date(), dateFormat: 'yy-mm-dd'});
-	
-});
 
-</script>
 
 		</div>
 		
@@ -313,5 +259,16 @@ $(document).ready(function(){
 <script src="/js/jquery.bootgrid.min.js"></script>
 
 <script src="/js/devoops.js"></script>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$("#userRegisterApply").click(function(){
+			$.post("startUserRegister",$("form").serialize(),function(){
+				alert("apply success");
+				LoadAjaxContent("inputInfo");
+			});
+		});
+	});
+	
+</script>
 </body>
 </html>
