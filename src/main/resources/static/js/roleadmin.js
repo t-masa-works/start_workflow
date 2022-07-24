@@ -6,7 +6,7 @@
 	    	navigation:2,
   			columnSelection:false,
 		    ajax:true,
-		    url:"roles",
+		    url:"/roles",
 		    formatters: {
 		    "rights":function(column,row){
 		    	var len=row.role_permission.length;
@@ -29,7 +29,7 @@
 	    	    {
 	    	    	$("#roleinfo").modal();
 	    	    	var rid=$(this).data("row-id");
-	    	    	$.get("roleinfo/"+rid,function(data){
+	    	    	$.get("/roleinfo/"+rid,function(data){
 	    	    		$("#rolename").val(data.rolename);
 	    	    		var role_permission=data.role_permission;
 	    	    		var roles=[];
@@ -37,7 +37,7 @@
 	    	    			var name=role_permission[a].permission.permissionname;
 	    	    			roles.push(name);
 	    	    		}
-	    	    		$.get("permissionlist",function(a){
+	    	    		$.get("/permissionlist",function(a){
 	    	    			$("#roles").html("");
 	    	    			for(var m=0;m<a.length;m++){
 	    	    				if(roles.indexOf(a[m].permissionname)<0)
@@ -59,7 +59,7 @@
 				    			return false;
 				    		}
 	    	    		
-		    	    		$.post("updaterole/"+rid,$("form").serialize(),function(data){
+		    	    		$.post("/updaterole/"+rid,$("form").serialize(),function(data){
 		    	    			$("#roleinfo").modal('hide');
 				    			alert("修改成功");
 				    			LoadAjaxContent("roleadmin");
@@ -77,7 +77,7 @@
 	 function deleterole(rid){
 	 	$.ajax({
 	     type: 'GET',
-	     url: "deleterole/"+rid ,
+	     url: "/deleterole/"+rid ,
 	     success:function(data) {  
 	             alert("删除成功！");  
 	             LoadAjaxContent("roleadmin");
@@ -91,7 +91,7 @@
 	  		$("form").attr("action","adduser");
 	  		$("#rolename").removeAttr("readonly");
 	  		$("#rolename").val("");
-	  		$.get("permissionlist",function(a){
+	  		$.get("/permissionlist",function(a){
 	    	    	$("#roles").html("");
 	    	    	for(var m=0;m<a.length;m++){
 	    	    		$("#roles").append("<div class=\"checkbox-inline\"><label><input name='permissionname[]' value="+a[m].permissionname+" type=\"checkbox\">"+a[m].permissionname+"<i class=\"fa fa-square-o\"></i></label></div>");

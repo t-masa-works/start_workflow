@@ -27,19 +27,19 @@ public class SystemController {
 	@Autowired
 	SystemService systemservice;
 	
-	@RequestMapping(value="/useradmin",method=RequestMethod.GET)
+	@RequestMapping(value="/system_manager/user",method=RequestMethod.GET)
 	String useradmin(){
-		return "system/useradmin";
+		return "system_manager/user/index";
 	}
 	
-	@RequestMapping(value="/roleadmin",method=RequestMethod.GET)
+	@RequestMapping(value="/system_manager/role",method=RequestMethod.GET)
 	String roleadmin(){
-		return "system/roleadmin";
+		return "system_manager/role/index";
 	}
 	
-	@RequestMapping(value="/permissionadmin",method=RequestMethod.GET)
+	@RequestMapping(value="/system_manager/user_role",method=RequestMethod.GET)
 	String permissionadmin(){
-		return "system/permissionadmin";
+		return "system_manager/user_role/index";
 	}
 	
 	@RequestMapping(value="/userlist",method=RequestMethod.GET)
@@ -106,7 +106,7 @@ public class SystemController {
 	@RequestMapping(value="/deleteuser/{uid}",method=RequestMethod.GET)
 	String deleteuser(@PathVariable("uid")int uid){
 		systemservice.deleteuser(uid);
-		return "system/useradmin";
+		return "system_manager/user/index";
 	}
 	
 	@RequestMapping(value="/adduser",method=RequestMethod.GET)
@@ -115,17 +115,17 @@ public class SystemController {
 			systemservice.adduser(user);
 		else
 			systemservice.adduser(user, rolename);
-		return "system/useradmin";
+		return "system_manager/user/index";
 	}
 	
 	@RequestMapping(value="/updateuser/{uid}",method=RequestMethod.POST)
 	String updateuser(@PathVariable("uid")int uid,@ModelAttribute("user")User user,@RequestParam(value="rolename[]",required = false)String[] rolename){
 		systemservice.updateuser(uid, user, rolename);
-		return "system/useradmin";
+		return "system_manager/user/index";
 	}
 	
 	
-	@RequestMapping(value="permissionlist",method=RequestMethod.GET)
+	@RequestMapping(value="/permissionlist",method=RequestMethod.GET)
 	@ResponseBody
 	List<Permission> getPermisions(){
 		return systemservice.getPermisions();
@@ -136,30 +136,30 @@ public class SystemController {
 		Role r=new Role();
 		r.setRolename(rolename);
 		systemservice.addrole(r, permissionname);
-		return "system/roleadmin";
+		return "system_manager/role/index";
 	}
 	
 	@RequestMapping(value="/deleterole/{rid}",method=RequestMethod.GET)
 	String deleterole(@PathVariable("rid")int rid){
 		systemservice.deleterole(rid);
-		return "system/roleadmin";
+		return "system_manager/role/index";
 	}
 	
-	@RequestMapping(value="roleinfo/{rid}",method=RequestMethod.GET)
+	@RequestMapping(value="/roleinfo/{rid}",method=RequestMethod.GET)
 	@ResponseBody
 	Role getRolebyrid(@PathVariable("rid")int rid){
 		return systemservice.getRolebyid(rid);
 	}
 	
-	@RequestMapping(value="updaterole/{rid}",method=RequestMethod.POST)
+	@RequestMapping(value="/updaterole/{rid}",method=RequestMethod.POST)
 	String updaterole(@PathVariable("rid")int rid,@RequestParam(value="permissionname[]")String[] permissionnames){
 		systemservice.deleterolepermission(rid);
 		systemservice.updaterole(rid, permissionnames);
-		return "system/roleadmin";
+		return "system_manager/role/index";
 	}
 	
 	
-	@RequestMapping(value="permissions",method=RequestMethod.GET)
+	@RequestMapping(value="/permissions",method=RequestMethod.GET)
 	@ResponseBody
 	DataGrid<Permission> getpermissions(@RequestParam("current") int current,@RequestParam("rowCount") int rowCount){
 		List<Permission> p=systemservice.getPermisions();
@@ -172,16 +172,16 @@ public class SystemController {
 		return grid;
 	}
 	
-	@RequestMapping(value="addpermission",method=RequestMethod.POST)
+	@RequestMapping(value="/addpermission",method=RequestMethod.POST)
 	String addpermission(@RequestParam("permissionname") String permissionname){
 		systemservice.addPermission(permissionname);
-		return "system/permissionadmin";
+		return "system_manager/user_role/index";
 	}
 	
 	
-	@RequestMapping(value="deletepermission/{pid}",method=RequestMethod.GET)
+	@RequestMapping(value="/deletepermission/{pid}",method=RequestMethod.GET)
 	String deletepermission(@PathVariable("pid") int pid){
 		systemservice.deletepermission(pid);
-		return "system/permissionadmin";
+		return "system_manager/user_role/index";
 	}
 }

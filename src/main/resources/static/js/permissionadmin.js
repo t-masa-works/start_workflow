@@ -6,7 +6,7 @@
 	    	navigation:2,
   			columnSelection:false,
 		    ajax:true,
-		    url:"permissions",
+		    url:"/permissions",
 		    formatters: {
 		    "commands": function(column, row)
 		    {
@@ -24,7 +24,7 @@
 	 function deletepermission(pid){
 	 	$.ajax({
 	     type: 'GET',
-	     url: "deletepermission/"+pid,
+	     url: "/deletepermission/"+pid,
 	     success:function(data) {  
 	             alert("删除成功！");  
 	             LoadAjaxContent("permissionadmin");
@@ -42,7 +42,7 @@
 	    			alert("权限名不得为空");
 	    			return false;
 	    		}
-	    		$.post("addpermission",$("form").serialize(),function(){
+	    		$.post("/addpermission",$("form").serialize(),function(){
 	    			$("#permissioninfo").modal('hide');
 	    			LoadAjaxContent("permissionadmin");
 	    			history.go(0);

@@ -125,14 +125,14 @@
                 </a>
                 <ul class="dropdown-menu" style="display: block;">
                     <li>
-                        <a href="/system_manager/process_list" class="active ajax-link">
+                        <a href="/system_manager/process_list" class="active">
                             <i class="fa fa-dashboard"></i>
                             <span class="hidden-xs">workflow list</span>
                         </a>
                     </li>
                     <li><a href="/system_manager/user">user management</a></li>
                     <li><a href="/system_manager/role">role management</a></li>
-                    <li><a href="/system_manager/user_role">right management</a></li>
+                    <li><a href="/system_manager/user_role">permission management</a></li>
                 </ul>
             </li>
             
@@ -141,17 +141,15 @@
 
 		<div id="content" class="col-xs-12 col-sm-10">
 
-<script src="./js/useradmin.js"></script>  
-     
 <div class="row">
 	<div id="breadcrumb" class="col-xs-12">
 	<a href="#" class="show-sidebar">
 						  <i class="fa fa-bars"></i>
 						</a>
 		<ol class="breadcrumb pull-left">
-			<li><a href="index">首页</a></li>
-			<li><a href="#">系统管理</a></li>
-			<li><a href="#">用户管理</a></li>
+			<li><a href="/">top</a></li>
+			<li><a href="#">system management</a></li>
+			<li><a href="#">user management</a></li>
 		</ol>
 	</div>
 </div>       
@@ -161,7 +159,7 @@
                     <div class="box ui-draggable ui-droppable">
 				<div class="box-header">
 					<div class="box-name">
-						<i class="fa fa-coffee"></i> <span>用户管理</span>
+						<i class="fa fa-coffee"></i> <span>user management</span>
 					</div>
 					<div class="box-icons">
 						<a class="collapse-link"> <i class="fa fa-chevron-up"></i>
@@ -172,16 +170,16 @@
 					<div class="no-move"></div>
 				</div>
 				<div class="box-content">
-				<button id="adduser" type="button" class="btn btn-primary">添加新用户</button>
+				<button id="adduser" type="button" class="btn btn-primary">add user</button>
 					 <table id="grid-data" class="table table-condensed table-hover table-striped">
 							        <thead>
 							            <tr>
-							                <th data-column-id="id" data-identifier="true" data-type="numeric">用户id</th>
-							                <th data-column-id="username">用户名</th>
-							                <th data-column-id="tel">电话</th>
-							                <th data-column-id="age">年龄</th>
-							                <th data-column-id="rolelist">拥有角色</th>
-							                <th data-formatter="commands">操作</th>
+							                <th data-column-id="id" data-identifier="true" data-type="numeric">user id</th>
+							                <th data-column-id="username">user name</th>
+							                <th data-column-id="tel">tel</th>
+							                <th data-column-id="age">age</th>
+							                <th data-column-id="rolelist">role list</th>
+							                <th data-formatter="commands">operation</th>
 							            </tr>
 							        </thead>
 							    </table>
@@ -196,38 +194,38 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-        <h4 class="modal-title" id="myModalLabel">编辑用户信息</h4>
+        <h4 class="modal-title" id="myModalLabel">Edit</h4>
       </div>
       <form class="form-horizontal" method="post">
       <div class="modal-body">
         	<div class="row form-group">
-			    <label for="username" class="col-sm-1 control-label">用户名</label>
+			    <label for="username" class="col-sm-1 control-label">user name</label>
 			    <div class="col-sm-11">
 			      <input type="text" name="username" class="form-control" id="username" readonly="readonly"/>
 			    </div>
         	</div>
         	<div class="row form-group">
-			    <label for="tel" class="col-sm-1 control-label">电话</label>
+			    <label for="tel" class="col-sm-1 control-label">tel</label>
 			    <div class="col-sm-11">
 			      <input type="text" name="tel" class="form-control" id="tel"/>
 			    </div>
         	</div>
         	<div class="row form-group">
-			    <label for="age" class="col-sm-1 control-label">年龄</label>
+			    <label for="age" class="col-sm-1 control-label">age</label>
 			    <div class="col-sm-11">
 			      <input type="text" name="age" class="form-control" id="age"/>
 			    </div>
         	</div>
-        	<h4 class="page-header">拥有角色</h4>
+        	<h4 class="page-header">role list</h4>
         	<div class="row form-group">
 					<div class="col-sm-12" id="roles">
 					</div>
 			</div>
-			<p>新用户初始密码为1234</p>
+			<p>new user password is 1234</p>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" id="btn" class="btn btn-primary">保存</button>
+        <button type="button" id="btn" class="btn btn-primary">save</button>
       </div>
       </form>
     </div>
@@ -251,5 +249,7 @@
 <script src="/js/jquery.bootgrid.min.js"></script>
 
 <script src="/js/devoops.js"></script>
-</body>
+<script src="/js/useradmin.js"></script>
+
+	</body>
 </html>

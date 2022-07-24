@@ -7,7 +7,7 @@
 	    	navigation:2,
   			columnSelection:false,
 		    ajax:true,
-		    url:"userlist",
+		    url:"/userlist",
 		    formatters: {
 		    "commands": function(column, row)
 		    {
@@ -22,7 +22,7 @@
 	    	    {
 	    	    	$("#userinfo").modal();
 	    	    	var uid=$(this).data("row-id");
-	    	    	$.get("user/"+uid,function(data){
+	    	    	$.get("/user/"+uid,function(data){
 	    	    		$("#username").val(data.username);
 	    	    		$("#tel").val(data.tel);
 	    	    		$("#age").val(data.age);
@@ -32,7 +32,7 @@
 	    	    			var role=user_role[a].role.rolename;
 	    	    			roles.push(role);
 	    	    		}
-	    	    		$.get("rolelist",function(a){
+	    	    		$.get("/rolelist",function(a){
 	    	    			$("#roles").html("");
 	    	    			for(var m=0;m<a.length;m++){
 	    	    				if(roles.indexOf(a[m].rolename)<0)
@@ -51,7 +51,7 @@
 				    			alert("年龄不得为空");
 				    			return false;
 				    		}
-		    	    		$.post("updateuser/"+uid,$("form").serialize(),function(data){
+		    	    		$.post("/updateuser/"+uid,$("form").serialize(),function(data){
 		    	    			$("#userinfo").modal('hide');
 				    			alert("修改成功");
 				    			LoadAjaxContent("useradmin");
@@ -69,7 +69,7 @@
 	 function deleteuser(uid){
 	 	$.ajax({
 	     type: 'GET',
-	     url: "deleteuser/"+uid ,
+	     url: "/deleteuser/"+uid ,
 	     success:function(data) {  
 	             alert("删除成功！");  
 	             LoadAjaxContent("useradmin");
@@ -85,7 +85,7 @@
 	  		$("#username").val("");
 	  		$("#tel").val("");
 	  		$("#age").val("");
-	  		$.get("rolelist",function(a){
+	  		$.get("/rolelist",function(a){
 	    	    	$("#roles").html("");
 	    	    	for(var m=0;m<a.length;m++){
 	    	    		$("#roles").append("<div class=\"checkbox-inline\"><label><input name='rolename[]' value="+a[m].rolename+" type=\"checkbox\">"+a[m].rolename+"<i class=\"fa fa-square-o\"></i></label></div>");
@@ -105,7 +105,7 @@
 	    			alert("年龄不得为空");
 	    			return false;
 	    		}
-	    		$.get("adduser",$("form").serialize(),function(){
+	    		$.get("/adduser",$("form").serialize(),function(){
 	    			$("#userinfo").modal('hide');
 	    			alert("添加成功");
 	    			LoadAjaxContent("useradmin");
