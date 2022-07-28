@@ -247,9 +247,9 @@ public class userRegisterController {
 		return userRegisterInfo;
 	}
 
-	@RequestMapping(value = "/manager/task-user_register_infor", method = RequestMethod.GET)
+	@RequestMapping(value = "/manager/check_user_infor", method = RequestMethod.GET)
 	String manager_url() {
-		return "//manager/user_register_infor/index";
+		return "/manager/check_user_infor/index";
 	}
 
 	@RequestMapping(value = "/task/completebymanager/{taskid}", method = RequestMethod.POST)
@@ -264,9 +264,9 @@ public class userRegisterController {
 		return new MSG("success");
 	}
 
-	@RequestMapping(value = "/senior_manager/task-user_register_infor", method = RequestMethod.GET)
+	@RequestMapping(value = "/senior_manager/check_user_infor", method = RequestMethod.GET)
 	String senior_manager_url() {
-		return "//senior_manager/user_register_infor/index";
+		return "/senior_manager/check_user_infor/index";
 	}
 
 	@RequestMapping(value = "/task/completebysenior/{taskid}", method = RequestMethod.POST)

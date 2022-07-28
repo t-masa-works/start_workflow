@@ -51,6 +51,11 @@ public class Login {
 		return "login/manager_login/index";
 	}
 
+	@RequestMapping(value="/login/senior_manager_login",method = RequestMethod.GET)
+	public String senior_manager_login(){
+		return "login/senior_manager_login/index";
+	}
+
 	@RequestMapping(value="/logout",method = RequestMethod.GET)
 	public String logout(HttpSession httpSession){
 		httpSession.removeAttribute("username");
