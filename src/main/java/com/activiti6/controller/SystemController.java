@@ -21,7 +21,7 @@ import com.activiti6.po.UserRole;
 import com.activiti6.service.SystemService;
 import io.swagger.annotations.Api;
 
-@Api(value = "系统管理接口")
+@Api(value = "System_Manager")
 @Controller
 public class SystemController {
 	@Autowired

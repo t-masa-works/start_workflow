@@ -11,16 +11,15 @@ import java.util.Map;
 
 public interface UserRegisterService {
 	public ProcessInstance startWorkflow(UserRegisterInfo userRegisterInfo,String userid,Map<String,Object> variables);
-	public List<UserRegisterInfo> getpagedepttask(String userid,int firstrow,int rowcount);
-	public int getalldepttask(String userid);
+	public List<UserRegisterInfo> getPageManagerTask(String userid,int firstrow,int rowcount);
+	public int getAllManagertask(String userid);
 	public UserRegisterInfo getUserRegisterInfo(int id);
-	public List<UserRegisterInfo> getpagehrtask(String userid,int firstrow,int rowcount);
-	public int getallhrtask(String userid);
-	public List<UserRegisterInfo> getpageXJtask(String userid,int firstrow,int rowcount);
-	public int getallXJtask(String userid);
-	public List<UserRegisterInfo> getpageupdateapplytask(String userid,int firstrow,int rowcount);
-	public int getallupdateapplytask(String userid);
-	public void completereportback(String taskid, String realstart_time, String realend_time);
-	public void updatecomplete(String taskid, UserRegisterInfo userRegisterInfo,String reappply);
+	public List<UserRegisterInfo> getPagerSeniorManagertask(String userid,int firstrow,int rowcount);
+	public int getAllSeniortask(String userid);
+	public List<UserRegisterInfo> getPageUpdatetask(String userid,int firstrow,int rowcount);
+	public int getAllUpdatetask(String userid);
+	public void completeByManager(String taskid, String manager_check_time);
+	public void completeBySeniorManager(String taskid, String seniorManager_check_time);
+	public void updateReapply(String taskid, UserRegisterInfo userRegisterInfo,String reapply);
 	public List<String> getHighLightedFlows(ProcessDefinitionEntity deployedProcessDefinition,List<HistoricActivityInstance> historicActivityInstances);
 }

@@ -34,7 +34,7 @@ public class UserRegisterServiceImpl implements UserRegisterService{
 		userRegisterInfo.setApply_time(new Date().toString());
 		userRegisterInfo.setUser_id(userid);
 		userRegisterInfoMapper.save(userRegisterInfo);
-		String businesskey=String.valueOf(userRegisterInfo.getId());//使用leaveapply表的主键作为businesskey,连接业务数据和流程数据
+		String businesskey=String.valueOf(userRegisterInfo.getId());//使用user_register_info表的主键作为businesskey,连接业务数据和流程数据
 		identityservice.setAuthenticatedUserId(userid);
 		ProcessInstance instance=runtimeservice.startProcessInstanceByKey("userregiste",businesskey,variables);
 		System.out.println(businesskey);
@@ -44,9 +44,9 @@ public class UserRegisterServiceImpl implements UserRegisterService{
 		return instance;
 	}
 
-	public List<UserRegisterInfo> getpagedepttask(String userid,int firstrow,int rowcount) {
+	public List<UserRegisterInfo> getPageManagerTask(String userid,int firstrow,int rowcount) {
 		List<UserRegisterInfo> results=new ArrayList<UserRegisterInfo>();
-		List<Task> tasks=taskservice.createTaskQuery().taskCandidateGroup("部门经理").listPage(firstrow, rowcount);
+		List<Task> tasks=taskservice.createTaskQuery().taskCandidateGroup("Manager").listPage(firstrow, rowcount);
 		for(Task task:tasks){
 			String instanceid=task.getProcessInstanceId();
 			ProcessInstance ins=runtimeservice.createProcessInstanceQuery().processInstanceId(instanceid).singleResult();
@@ -58,8 +58,8 @@ public class UserRegisterServiceImpl implements UserRegisterService{
 		return results;
 	}
 	
-	public int getalldepttask(String userid) {
-		List<Task> tasks=taskservice.createTaskQuery().taskCandidateGroup("部门经理").list();
+	public int getAllManagertask(String userid) {
+		List<Task> tasks=taskservice.createTaskQuery().taskCandidateGroup("Manager").list();
 		return tasks.size();
 	}
 
@@ -68,9 +68,9 @@ public class UserRegisterServiceImpl implements UserRegisterService{
 		return userRegisterInfo;
 	}
 
-	public List<UserRegisterInfo> getpagehrtask(String userid,int firstrow,int rowcount) {
+	public List<UserRegisterInfo> getPagerSeniorManagertask(String userid,int firstrow,int rowcount) {
 		List<UserRegisterInfo> results=new ArrayList<UserRegisterInfo>();
-		List<Task> tasks=taskservice.createTaskQuery().taskCandidateGroup("人事").listPage(firstrow, rowcount);
+		List<Task> tasks=taskservice.createTaskQuery().taskCandidateGroup("SeniorManager").listPage(firstrow, rowcount);
 		for(Task task:tasks){
 			String instanceid=task.getProcessInstanceId();
 			ProcessInstance ins=runtimeservice.createProcessInstanceQuery().processInstanceId(instanceid).singleResult();
@@ -82,14 +82,14 @@ public class UserRegisterServiceImpl implements UserRegisterService{
 		return results;
 	}
 
-	public int getallhrtask(String userid) {
-		List<Task> tasks=taskservice.createTaskQuery().taskCandidateGroup("人事").list();
+	public int getAllSeniortask(String userid) {
+		List<Task> tasks=taskservice.createTaskQuery().taskCandidateGroup("SeniorManager").list();
 		return tasks.size();
 	}
 	
-	public List<UserRegisterInfo> getpageXJtask(String userid,int firstrow,int rowcount) {
+	public List<UserRegisterInfo> getPageUpdatetask(String userid,int firstrow,int rowcount) {
 		List<UserRegisterInfo> results=new ArrayList<UserRegisterInfo>();
-		List<Task> tasks=taskservice.createTaskQuery().taskCandidateOrAssigned(userid).taskName("销假").listPage(firstrow, rowcount);
+		List<Task> tasks=taskservice.createTaskQuery().taskCandidateOrAssigned(userid).taskName("Update").listPage(firstrow, rowcount);
 		for(Task task:tasks){
 			String instanceid=task.getProcessInstanceId();
 			ProcessInstance ins=runtimeservice.createProcessInstanceQuery().processInstanceId(instanceid).singleResult();
@@ -101,51 +101,46 @@ public class UserRegisterServiceImpl implements UserRegisterService{
 		return results;
 	}
 
-	public int getallXJtask(String userid) {
-		List<Task> tasks=taskservice.createTaskQuery().taskCandidateOrAssigned(userid).taskName("销假").list();
+	public int getAllUpdatetask(String userid) {
+		List<Task> tasks=taskservice.createTaskQuery().taskCandidateOrAssigned(userid).taskName("Update").list();
 		return tasks.size();
 	}
 	
-	public List<UserRegisterInfo> getpageupdateapplytask(String userid,int firstrow,int rowcount) {
-		List<UserRegisterInfo> results=new ArrayList<UserRegisterInfo>();
-		List<Task> tasks=taskservice.createTaskQuery().taskCandidateOrAssigned(userid).taskName("调整申请").listPage(firstrow, rowcount);
-		for(Task task:tasks){
-			String instanceid=task.getProcessInstanceId();
-			ProcessInstance ins=runtimeservice.createProcessInstanceQuery().processInstanceId(instanceid).singleResult();
-			String businesskey=ins.getBusinessKey();
-			UserRegisterInfo a=userRegisterInfoMapper.getUserRegisterInfo(Integer.parseInt(businesskey));
-			a.setTask(task);
-			results.add(a);
-		}
-		return results;
-	}
-	
-	public int getallupdateapplytask(String userid) {
-		List<Task> tasks=taskservice.createTaskQuery().taskCandidateOrAssigned(userid).taskName("调整申请").list();
-		return tasks.size();
-	}
-	
-	public void completereportback(String taskid, String realstart_time, String realend_time) {
+	public void completeByManager(String taskid, String manager_check_time) {
 		Task task=taskservice.createTaskQuery().taskId(taskid).singleResult();
 		String instanceid=task.getProcessInstanceId();
 		ProcessInstance ins=runtimeservice.createProcessInstanceQuery().processInstanceId(instanceid).singleResult();
 		String businesskey=ins.getBusinessKey();
 		UserRegisterInfo a=userRegisterInfoMapper.getUserRegisterInfo(Integer.parseInt(businesskey));
-/*		a.setReality_start_time(realstart_time);
-		a.setReality_end_time(realend_time);*/
+		a.setManager_check_time(manager_check_time);
 		userRegisterInfoMapper.updateByPrimaryKey(a);
 		taskservice.complete(taskid);
 	}
 
-	public void updatecomplete(String taskid, UserRegisterInfo userRegisterInfo,String reapply) {
+	public void completeBySeniorManager(String taskid, String seniorManager_check_time) {
 		Task task=taskservice.createTaskQuery().taskId(taskid).singleResult();
 		String instanceid=task.getProcessInstanceId();
 		ProcessInstance ins=runtimeservice.createProcessInstanceQuery().processInstanceId(instanceid).singleResult();
 		String businesskey=ins.getBusinessKey();
 		UserRegisterInfo a=userRegisterInfoMapper.getUserRegisterInfo(Integer.parseInt(businesskey));
-/*		a.setLeave_type(userRegisterInfo.getLeave_type());
-		a.setStart_time(leave.getStart_time());
-		a.setEnd_time(leave.getEnd_time());*/
+		a.setSuperManager_check_time(seniorManager_check_time);
+		userRegisterInfoMapper.updateByPrimaryKey(a);
+		taskservice.complete(taskid);
+	}
+
+	public void updateReapply(String taskid, UserRegisterInfo userRegisterInfo,String reapply) {
+		Task task=taskservice.createTaskQuery().taskId(taskid).singleResult();
+		String instanceid=task.getProcessInstanceId();
+		ProcessInstance ins=runtimeservice.createProcessInstanceQuery().processInstanceId(instanceid).singleResult();
+		String businesskey=ins.getBusinessKey();
+		UserRegisterInfo a=userRegisterInfoMapper.getUserRegisterInfo(Integer.parseInt(businesskey));
+		a.setUsername(userRegisterInfo.getUsername());
+		a.setPassword(userRegisterInfo.getPassword());
+		a.setBirthday(userRegisterInfo.getBirthday());
+		a.setTel(userRegisterInfo.getTel());
+		a.setMail(userRegisterInfo.getMail());
+		a.setUser_id(userRegisterInfo.getUser_id());
+		a.setApply_time(userRegisterInfo.getApply_time());
 		a.setRemarks(userRegisterInfo.getRemarks());
 		Map<String,Object> variables=new HashMap<String,Object>();
 		variables.put("reapply", reapply);
