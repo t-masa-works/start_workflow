@@ -1,5 +1,8 @@
 package com.activiti6.controller;
 
+import java.io.BufferedInputStream;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -11,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.activiti.bpmn.converter.BpmnXMLConverter;
 import org.activiti.bpmn.model.BpmnModel;
 import org.activiti.engine.FormService;
 import org.activiti.engine.HistoryService;
@@ -41,6 +45,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.alibaba.fastjson.JSON;
 import com.activiti6.pagemodel.Process;
+import com.activiti6.exception.ProcessException;
 import com.activiti6.pagemodel.DataGrid;
 import com.activiti6.pagemodel.HistoryProcess;
 import com.activiti6.pagemodel.LeaveTask;
@@ -53,6 +58,7 @@ import com.activiti6.po.Role_permission;
 import com.activiti6.po.User;
 import com.activiti6.po.User_role;
 import com.activiti6.service.LeaveService;
+import com.activiti6.service.ProcessDefineService;
 import com.activiti6.service.SystemService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -76,11 +82,58 @@ public class ActivitiController {
 	HistoryService histiryservice;
 	@Autowired
 	SystemService systemservice;
+	@Autowired
+    private ProcessDefineService processDefineService;
 
 	@RequestMapping(value = "/system_manager/process_list", method = RequestMethod.GET)
 	String process() {
 		return "system_manager/process_list/index";
 	}
+
+	@RequestMapping(value = "/importModel", method = RequestMethod.POST)
+	public void importModel(@RequestParam MultipartFile uploadfile, HttpServletRequest request, HttpServletResponse response) {
+		try {
+            processDefineService.importModel(uploadfile);
+			response.sendRedirect("/system_manager/model_list");
+        } catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+    /**
+     *
+     * @Description: 模型导出
+     * @date 2019/7/11 9:06
+     */
+    @ApiOperation("模型导出")
+    @RequestMapping("/export")
+    public void export(@RequestParam("processDefinitionId") String processDefinitionId,
+                       HttpServletRequest request, HttpServletResponse response) {
+        try {
+            BpmnModel bpmnModel = processDefineService.export(processDefinitionId);
+            BpmnXMLConverter xmlConverter = new BpmnXMLConverter();
+            String name = bpmnModel.getMainProcess().getId();
+            byte[] xmlBytes = xmlConverter.convertToXML(bpmnModel);
+
+            response.setHeader("Content-Disposition", "attachment; filename=" + name + ".bpmn20.xml");
+            ServletOutputStream servletOutputStream = response.getOutputStream();
+            response.setContentType("application/octet-stream");
+            BufferedInputStream in = new BufferedInputStream(new ByteArrayInputStream(xmlBytes));
+
+            byte[] buffer = new byte[8096];
+            while (true) {
+                int count = in.read(buffer);
+                if (count == -1) {
+                    break;
+                }
+                servletOutputStream.write(buffer, 0, count);
+            }
+            servletOutputStream.flush();
+            servletOutputStream.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+            throw new ProcessException("模型导出失败！");
+        }
+    }
 
 	@RequestMapping(value = "/uploadworkflow", method = RequestMethod.POST)
 	public String fileupload(@RequestParam MultipartFile uploadfile, HttpServletRequest request) {

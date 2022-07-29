@@ -168,6 +168,16 @@
 			<div class="box-header">
 				<a href='/create?name=activiti&key=123456'>Create New Model</a>
 				</div>
+				<div class="box-content">
+					<form id="upload" action="/importModel" method="post" enctype="multipart/form-data">
+						<div class="form-group">
+							<label for="fileupload">importModel</label> 
+							<input type="file" name="uploadfile" class="form-control" id="fileupload"/>
+						</div>
+						<button type="submit" class="btn btn-primary">upload</button>
+					</form>
+				</div>
+
 			</div></div>
 		</div>
 		
@@ -206,7 +216,7 @@
 								 <a href="/editor?modelId=${model.id}">Edit</a>
 								 <a href="/publish?modelId=${model.id}">Publish</a>
 								 <a href="/revokePublish?modelId=${model.id}">Revoke</a>
-								 <a href="/delete?modelId=${model.id}">delete</a>
+								 <a href="/delete?modelId=${model.id}">Delete</a>
 								</td>
 							</tr>
 						   </#list>
