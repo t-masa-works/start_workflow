@@ -19,10 +19,7 @@
 	        formatters: {
 	        "commands": function(column, row)
 	        {
-	            return "<button type=\"button\" class=\"btn btn-xs btn-info command-delete\" data-row-id=\"" + row.deploymentId + "\">删除</button>"
-				+"<a class=\"btn btn-xs btn-info command-editor\" href=\"/editor?modelId="+ row.deploymentId +"\">编辑</a>"
-				+ "<button type=\"button\" class=\"btn btn-xs btn-info command-publish\" data-row-id=\"" + row.deploymentId + "\">发布</button>"
-				+ "<button type=\"button\" class=\"btn btn-xs btn-info command-revokePublish\" data-row-id=\"" + row.deploymentId + "\">撤销</button>"
+	            return "<button type=\"button\" class=\"btn btn-xs btn-info command-delete\" data-row-id=\"" + row.deploymentId + "\">Delete</button>"
 				;
 	        },
 	        "resname":function(column, row)
@@ -39,7 +36,7 @@
 		    grid.find(".command-delete").on("click", function(e)
 			{
 				$.post("/deletedeploy",{deployid:$(this).data("row-id")},function(){
-					alert("删除成功");
+					alert("Delete Success");
 					$("#grid-data").bootgrid("reload");
 				});
 			});

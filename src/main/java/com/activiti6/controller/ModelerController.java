@@ -48,9 +48,9 @@ public class ModelerController{
     private RuntimeService runtimeService;
 
     
-	@RequestMapping("index")
+	@RequestMapping("/system_manager/model_list")
 	public ModelAndView index(ModelAndView modelAndView) {
-        modelAndView.setViewName("index");
+        modelAndView.setViewName("system_manager/modeler/index");
         modelAndView.addObject("modelList", repositoryService.createModelQuery().list());
         return modelAndView;
 	}
@@ -61,13 +61,8 @@ public class ModelerController{
      */
     @GetMapping("/editor")
     public String editor(String modelId){
-		return "system_manager/modeler/index";
+		return "system_manager/modeler/editor";
     }
-
-	@RequestMapping(value="/login2",method = RequestMethod.GET)
-	public String login(){
-		return "login";
-	}
 
     /**
      * 创建模型

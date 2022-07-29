@@ -18,7 +18,22 @@ import io.swagger.annotations.Api;
 public class Login {
 	@Autowired
 	LoginService loginservice;
-	
+
+	@RequestMapping(value="/index",method = RequestMethod.GET)
+	public String index(){
+		return "index";
+	}
+
+	@RequestMapping(value="/company/about",method = RequestMethod.GET)
+	public String about(){
+		return "company/about/index";
+	}
+
+	@RequestMapping(value="/post",method = RequestMethod.GET)
+	public String post(){
+		return "post/index";
+	}
+
 	@RequestMapping(value="/loginvalidate",method = RequestMethod.POST)
 	public String loginvalidate(@RequestParam("username") String username,
 								@RequestParam("password") String pwd,
