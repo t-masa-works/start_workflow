@@ -46,7 +46,7 @@ public class UserRegisterServiceImpl implements UserRegisterService{
 
 	public List<UserRegisterInfo> getPageManagerTask(String userid,int firstrow,int rowcount) {
 		List<UserRegisterInfo> results=new ArrayList<UserRegisterInfo>();
-		List<Task> tasks=taskservice.createTaskQuery().taskCandidateGroup("Manager").listPage(firstrow, rowcount);
+		List<Task> tasks=taskservice.createTaskQuery().taskCandidateGroup("ManagerGroup").listPage(firstrow, rowcount);
 		for(Task task:tasks){
 			String instanceid=task.getProcessInstanceId();
 			ProcessInstance ins=runtimeservice.createProcessInstanceQuery().processInstanceId(instanceid).singleResult();
@@ -59,7 +59,7 @@ public class UserRegisterServiceImpl implements UserRegisterService{
 	}
 	
 	public int getAllManagertask(String userid) {
-		List<Task> tasks=taskservice.createTaskQuery().taskCandidateGroup("Manager").list();
+		List<Task> tasks=taskservice.createTaskQuery().taskCandidateGroup("ManagerGroup").list();
 		return tasks.size();
 	}
 
@@ -70,7 +70,7 @@ public class UserRegisterServiceImpl implements UserRegisterService{
 
 	public List<UserRegisterInfo> getPagerSeniorManagertask(String userid,int firstrow,int rowcount) {
 		List<UserRegisterInfo> results=new ArrayList<UserRegisterInfo>();
-		List<Task> tasks=taskservice.createTaskQuery().taskCandidateGroup("SeniorManager").listPage(firstrow, rowcount);
+		List<Task> tasks=taskservice.createTaskQuery().taskCandidateGroup("SeniorManagerGroup").listPage(firstrow, rowcount);
 		for(Task task:tasks){
 			String instanceid=task.getProcessInstanceId();
 			ProcessInstance ins=runtimeservice.createProcessInstanceQuery().processInstanceId(instanceid).singleResult();
@@ -83,7 +83,7 @@ public class UserRegisterServiceImpl implements UserRegisterService{
 	}
 
 	public int getAllSeniortask(String userid) {
-		List<Task> tasks=taskservice.createTaskQuery().taskCandidateGroup("SeniorManager").list();
+		List<Task> tasks=taskservice.createTaskQuery().taskCandidateGroup("SeniorManagerGroup").list();
 		return tasks.size();
 	}
 	
