@@ -20,6 +20,7 @@
 	        "commands": function(column, row)
 	        {
 	            return "<button type=\"button\" class=\"btn btn-xs btn-info command-delete\" data-row-id=\"" + row.deploymentId + "\">Delete</button>"
+				+"<button type=\"button\" class=\"btn btn-xs btn-info command-export\" data-row-id=\"" + row.id + "\">Export</button>"
 				;
 	        },
 	        "resname":function(column, row)
@@ -38,6 +39,27 @@
 				$.post("/deletedeploy",{deployid:$(this).data("row-id")},function(){
 					alert("Delete Success");
 					$("#grid-data").bootgrid("reload");
+				});
+			});
+		    grid.find(".command-export").on("click", function(e)
+			{
+				$.post("/export",{processDefinitionId:$(this).data("row-id")},function(resp){
+					// コールバック関数でなんか処理
+					if (resp.length == 0) {
+
+					} else {
+						// レスポンスに入力されていればエラーメッセージとしてダイアログに出力(とする)
+						var binaryData = [];
+						binaryData.push(resp);
+						const url = window.URL.createObjectURL(new Blob(binaryData, {type: "application/xml"}));
+						const a = document.createElement("a");
+						document.body.appendChild(a);
+						a.download = 'bpmn20.xml';
+						a.href = url;
+						a.click();
+						a.remove();
+						window.URL.revokeObjectURL(url);
+					}
 				});
 			});
 		});

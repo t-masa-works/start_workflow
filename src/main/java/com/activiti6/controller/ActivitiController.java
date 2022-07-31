@@ -105,7 +105,7 @@ public class ActivitiController {
      * @date 2019/7/11 9:06
      */
     @ApiOperation("模型导出")
-    @RequestMapping("/export")
+    @RequestMapping(value = "/export", method = RequestMethod.POST)
     public void export(@RequestParam("processDefinitionId") String processDefinitionId,
                        HttpServletRequest request, HttpServletResponse response) {
         try {
