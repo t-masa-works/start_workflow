@@ -6,6 +6,8 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
+import com.activiti6.bpmn.converter.CustomUserTaskXMLConverter;
+import org.activiti.bpmn.converter.BpmnXMLConverter;
 import org.activiti.bpmn.model.BpmnModel;
 import org.activiti.editor.constants.ModelDataJsonConstants;
 import org.activiti.editor.language.json.converter.BpmnJsonConverter;
@@ -116,31 +118,35 @@ public class ModelerController{
     @ResponseBody
     @RequestMapping("/publish")
     public Object publish(String modelId){
-    	logger.info("流程部署入参modelId：{}",modelId);
+    	logger.info("Process deployment parameters input modelId：{}",modelId);
     	Map<String, String> map = new HashMap<String, String>();
 		try {
 			Model modelData = repositoryService.getModel(modelId);
 	        byte[] bytes = repositoryService.getModelEditorSource(modelData.getId());
 	        if (bytes == null) {
-	        	logger.info("部署ID:{}的模型数据为空，请先设计流程并成功保存，再进行发布",modelId);
-	        	map.put("code", "FAILURE");
-	            return map;
+	        	logger.info("modelid:{}The model data of is empty, please design the process and save it successfully before publishing",modelId);
+	        	//return "/system_manager/modeler/index";
+				map.put("code", "FAILURE");
+				return map;
 	        }
 			JsonNode modelNode = new ObjectMapper().readTree(bytes);
 			BpmnModel model = new BpmnJsonConverter().convertToBpmnModel(modelNode);
+			BpmnXMLConverter.addConverter(new CustomUserTaskXMLConverter());
 	        Deployment deployment = repositoryService.createDeployment()
 	        		.name(modelData.getName())
 	        		.addBpmnModel(modelData.getKey()+".bpmn20.xml", model)
 	        		.deploy();
 	        modelData.setDeploymentId(deployment.getId());
 	        repositoryService.saveModel(modelData);
-	        map.put("code", "SUCCESS");
+	        //return "/system_manager/modeler/index";
+			map.put("code", "SUCCESS");
+			return map;
 		} catch (Exception e) {
-			logger.info("部署modelId:{}模型服务异常：{}",modelId,e);
+			logger.info("modelId:{}Model service exception：{}",modelId,e);
+			//return "/system_manager/modeler/index";
 			map.put("code", "FAILURE");
+			return map;
 		}
-		logger.info("流程部署出参map：{}",map);
-        return map;
     }
     
     /**
