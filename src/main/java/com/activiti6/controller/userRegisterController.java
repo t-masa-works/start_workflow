@@ -65,6 +65,11 @@ public class userRegisterController {
 		return "user/update_infor/index";
 	}
 
+	@RequestMapping(value = "/user/upload_user_certificate", method = RequestMethod.GET)
+	public String uploadUserCertificate() {
+		return "user/update_infor/index";
+	}
+
 	@RequestMapping(value = "/startUserRegister", method = RequestMethod.POST)
 	@ResponseBody
 	public MSG start_user_register(UserRegisterInfo userRegisterInfo, HttpSession session) {
@@ -255,6 +260,16 @@ public class userRegisterController {
 	@RequestMapping(value = "/task/completebyuser/{taskid}", method = RequestMethod.POST)
 	@ResponseBody
 	public MSG userComplete(HttpSession session, @PathVariable("taskid") String taskid, HttpServletRequest req) {
+		String userid = (String) session.getAttribute("username");
+		Map<String, Object> variables = new HashMap<String, Object>();
+		taskservice.claim(taskid, userid);
+		taskservice.complete(taskid, variables);
+		return new MSG("success");
+	}
+
+	@RequestMapping(value = "/task/userCertificateUpload/{taskid}", method = RequestMethod.POST)
+	@ResponseBody
+	public MSG userCertificateUpload(HttpSession session, @PathVariable("taskid") String taskid, HttpServletRequest req) {
 		String userid = (String) session.getAttribute("username");
 		Map<String, Object> variables = new HashMap<String, Object>();
 		taskservice.claim(taskid, userid);

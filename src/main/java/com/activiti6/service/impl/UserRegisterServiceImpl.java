@@ -89,7 +89,7 @@ public class UserRegisterServiceImpl implements UserRegisterService{
 	
 	public List<UserRegisterInfo> getPageUpdatetask(String userid,int firstrow,int rowcount) {
 		List<UserRegisterInfo> results=new ArrayList<UserRegisterInfo>();
-		List<Task> tasks=taskservice.createTaskQuery().taskCandidateOrAssigned(userid).taskName("Update").listPage(firstrow, rowcount);
+		List<Task> tasks=taskservice.createTaskQuery().taskCandidateOrAssigned(userid).taskName("upload user certificate").listPage(firstrow, rowcount);
 		for(Task task:tasks){
 			String instanceid=task.getProcessInstanceId();
 			ProcessInstance ins=runtimeservice.createProcessInstanceQuery().processInstanceId(instanceid).singleResult();
