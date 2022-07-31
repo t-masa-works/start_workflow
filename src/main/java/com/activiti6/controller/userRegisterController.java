@@ -252,6 +252,16 @@ public class userRegisterController {
 		return "/manager/check_user_infor/index";
 	}
 
+	@RequestMapping(value = "/task/completebyuser/{taskid}", method = RequestMethod.POST)
+	@ResponseBody
+	public MSG userComplete(HttpSession session, @PathVariable("taskid") String taskid, HttpServletRequest req) {
+		String userid = (String) session.getAttribute("username");
+		Map<String, Object> variables = new HashMap<String, Object>();
+		taskservice.claim(taskid, userid);
+		taskservice.complete(taskid, variables);
+		return new MSG("success");
+	}
+
 	@RequestMapping(value = "/task/completebymanager/{taskid}", method = RequestMethod.POST)
 	@ResponseBody
 	public MSG managerComplete(HttpSession session, @PathVariable("taskid") String taskid, HttpServletRequest req) {

@@ -374,7 +374,7 @@ public class PurchaseController {
 		return new MSG("ok");
 	}
 	
-	@RequestMapping(value="/managertasklist",method=RequestMethod.POST)
+	@RequestMapping(value="/managertasklist2",method=RequestMethod.POST)
 	@ResponseBody
 	DataGrid<PurchaseTask> managertasklist(HttpSession session,@RequestParam("current") int current,@RequestParam("rowCount") int rowCount){
 		DataGrid<PurchaseTask> grid=new DataGrid<PurchaseTask>();
