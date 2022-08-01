@@ -22,6 +22,10 @@ public interface ProcessInstanceService {
      * @return
      */
     ProcessInstanceInfoResult getInstanceInfo(String processInstanceId);
+    /**
+     * 流程初始化
+     */
+    void initProcessConfig();
 
     /**
      * 校验流程撤回

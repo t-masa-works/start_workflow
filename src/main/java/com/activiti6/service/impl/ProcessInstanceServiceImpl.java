@@ -134,6 +134,15 @@ public class ProcessInstanceServiceImpl implements ProcessInstanceService {
         }
         return result;
     }
+    /**
+     * 流程初始化
+     */
+    @Override
+    public void initProcessConfig(){
+        ProcessEngineConfigurationImpl processEngineConfiguration = (ProcessEngineConfigurationImpl)processEngine.getProcessEngineConfiguration();
+        Context.setCommandContext(processEngineConfiguration.getCommandContextFactory().createCommandContext(null));
+        Context.setProcessEngineConfiguration(processEngineConfiguration);
+    }
 
     /**
      * 流程撤回

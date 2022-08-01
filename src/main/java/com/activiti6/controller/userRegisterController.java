@@ -3,6 +3,7 @@ package com.activiti6.controller;
 import com.activiti6.pagemodel.Process;
 import com.activiti6.pagemodel.*;
 import com.activiti6.po.*;
+import com.activiti6.service.ProcessInstanceService;
 import com.activiti6.service.SystemService;
 import com.activiti6.service.UserRegisterService;
 import io.swagger.annotations.Api;
@@ -34,6 +35,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import com.activiti6.service.ProcessInstanceService;
 
 @Api(value = "user_register")
 @Controller
@@ -54,6 +56,8 @@ public class userRegisterController {
 	SystemService systemservice;
 	@Autowired
 	UserRegisterService userRegisterService;
+    @Autowired
+    private ProcessInstanceService processInstanceService;
 
 	@RequestMapping(value = "/user/input_infor", method = RequestMethod.GET)
 	public String inputInfo() {
@@ -272,6 +276,7 @@ public class userRegisterController {
 	public MSG userCertificateUpload(HttpSession session, @PathVariable("taskid") String taskid, HttpServletRequest req) {
 		String userid = (String) session.getAttribute("username");
 		Map<String, Object> variables = new HashMap<String, Object>();
+		processInstanceService.initProcessConfig();
 		taskservice.claim(taskid, userid);
 		taskservice.complete(taskid, variables);
 		return new MSG("success");
