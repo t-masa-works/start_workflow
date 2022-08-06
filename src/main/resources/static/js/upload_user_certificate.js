@@ -32,13 +32,6 @@ $(document).ready(function(){
 				$("form").attr("action","/task/completebymanager/"+taskid);
 			});
 			$("#manager").show();
-			$("#upload").click(function(){
-				$.post("/task/userCertificateUpload/"+taskid,$("form").serialize(),function(a){
-					alert("Upload Success");
-					LoadAjaxContent("manager_user_register");
-				});
-			
-			});
 		});
 	});
 });
