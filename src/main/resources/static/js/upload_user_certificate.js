@@ -22,6 +22,7 @@ $(document).ready(function(){
 			var taskid=$(this).data("row-id");
 			$.post("/gettaskbyid",{"taskid":taskid},function(data){
 				var obj = data;
+				$("#userId").val(obj.id);
 				$("#username").val(obj.username);
 				$("#password").val(obj.password);
 				$("#birthday").val(obj.birthday);

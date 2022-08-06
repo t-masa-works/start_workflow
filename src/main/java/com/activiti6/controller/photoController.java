@@ -87,10 +87,12 @@ public class photoController {
 	private PhotoService photoService;
 
 	@RequestMapping(value = "/importPhoto", method = RequestMethod.POST)
-	public void importPhoto(@RequestParam MultipartFile uploadfile, HttpServletRequest request,
+	public void importPhoto(@RequestParam MultipartFile uploadfile, 
+			@RequestParam("userId") int userId,
+			HttpServletRequest request,
 			HttpServletResponse response) {
 		try {
-			photoService.importPhoto(uploadfile);
+			photoService.importPhoto(uploadfile, userId);
 			response.sendRedirect("/user/upload_user_certificate");
 		} catch (Exception e) {
 			e.printStackTrace();

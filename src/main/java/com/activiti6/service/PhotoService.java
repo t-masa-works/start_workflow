@@ -10,6 +10,6 @@ public interface PhotoService {
      * @param file 上传的文件
      * @return 增加的模型信息
      */
-    Boolean importPhoto(MultipartFile file);
+    Boolean importPhoto(MultipartFile file, int userId);
 
 }

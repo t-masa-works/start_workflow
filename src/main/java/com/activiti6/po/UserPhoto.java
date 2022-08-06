@@ -9,7 +9,7 @@ import io.swagger.annotations.ApiModelProperty;
 
 @ApiModel("ユーザーphoto情報")
 public class UserPhoto implements Serializable {
-    @ApiModelProperty("primary key")
+    @ApiModelProperty("id")
     int id;
     @ApiModelProperty("photo")
     String photo;
@@ -19,6 +19,10 @@ public class UserPhoto implements Serializable {
 
     public int getId() {
         return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getPhoto() {
