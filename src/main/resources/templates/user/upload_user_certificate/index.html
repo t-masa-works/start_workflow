@@ -241,46 +241,26 @@
 								<div class="no-move"></div>
 							</div>
 							<div class="box-content">
-								<form role="form" action="" method="post">
-									<div class="form-group">
-										<label>applicator</label>
-										<input class="form-control" id="userid" readonly="readonly"/>
-									</div>
-									<div class="form-group">
-										<label>applytime</label>
-										<input class="form-control" id="applytime" readonly="readonly"/>
-									</div>
-									<div class="form-group">
-										<label>user name</label>
-										<input class="form-control" id="username" readonly="readonly"/>
-									</div>
-									<div class="form-group">
-										<label>password</label>
-										<input class="form-control" id="password" readonly="readonly"/>
-									</div>
-									<div class="form-group">
-										<label>birthday</label>
-										<input class="form-control" id="birthday" readonly="readonly"/>
-									</div>
-									<div class="form-group">
-										<label>tel</label>
-										<input class="form-control" id="tel" readonly="readonly"/>
-									</div>    
-									<div class="form-group">
-									<label>mail</label>
-										<input class="form-control" id="mail" readonly="readonly"/>
-									</div>    
-									<!-- <div class="form-group">
-										<label>application</label>
-										<div class="controls">
-											<select name="managerapprove">
-												<option value="true">agree</option>
-												<option value="false">refuse</option>
-											</select>
+								<div class="box-content">
+									<form id="upload" action="/importPhoto" method="post" enctype="multipart/form-data">
+										<div class="form-group">
+											<label for="fileupload">importPhoto</label> 
+											<input type="file" name="uploadfile" class="form-control" id="fileupload"/>
 										</div>
-									</div>  -->
-									<button id="upload" type="button" class="btn btn-default">upload</button>
-								</form>
+										<button type="submit" class="btn btn-primary">upload</button>
+									</form>
+								</div>
+							</div>
+							<div class="box-content">
+								<div class="box-content">
+									<form id="upload" action="/importIDCard" method="post" enctype="multipart/form-data">
+										<div class="form-group">
+											<label for="fileupload">importIDCard</label> 
+											<input type="file" name="uploadfile" class="form-control" id="fileupload"/>
+										</div>
+										<button type="submit" class="btn btn-primary">upload</button>
+									</form>
+								</div>
 							</div>
 						</div>
 					</div>
