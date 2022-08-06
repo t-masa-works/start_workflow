@@ -6,13 +6,17 @@ import com.activiti6.bpmn.builder.ImageBpmnModelUtils;
 import com.activiti6.bpmn.builder.ImageGenerator;
 import com.activiti6.constant.ProcessConstants;
 import com.activiti6.exception.ProcessException;
+import com.activiti6.mapper.UserPhotoMapper;
 import com.activiti6.service.PhotoService;
+import com.activiti6.po.UserPhoto;
+
 import lombok.extern.slf4j.Slf4j;
 import org.activiti.bpmn.model.BpmnModel;
 import org.activiti.bpmn.model.GraphicInfo;
 import org.activiti.engine.RepositoryService;
 import org.activiti.engine.repository.Model;
 import org.apache.commons.io.FileUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -39,6 +43,9 @@ public class PhotoServiceImpl implements PhotoService {
     @Resource
     private ObjectMapper objectMapper;
 
+    @Autowired
+	UserPhotoMapper userPhotoMapper;
+
     /**
      * 根据bpmn文件导入增加模型
      *
@@ -46,13 +53,17 @@ public class PhotoServiceImpl implements PhotoService {
      * @return 增加的模型信息
      */
     @Override
-    public Boolean importPhoto(MultipartFile file) {
+    public Boolean importPhoto(MultipartFile file, int userId) {
         try {
             // 新增模型数据并增加模型的xml和图片
             String filename = file.getOriginalFilename();
             InputStream is = file.getInputStream();
             File file_ = new File(filename);
             FileUtils.copyInputStreamToFile(is, file_);
+            UserPhoto userPhoto = new UserPhoto();
+            userPhoto.setId(userId);
+            userPhoto.setPhoto(filename);
+            userPhotoMapper.save(userPhoto);
             return true;
         } catch (Exception e) {
             log.error("文件解释出错，请检查文件是否为bpmn2.0标准格式", e);
