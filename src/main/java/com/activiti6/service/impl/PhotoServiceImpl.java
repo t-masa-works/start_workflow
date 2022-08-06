@@ -12,6 +12,7 @@ import org.activiti.bpmn.model.BpmnModel;
 import org.activiti.bpmn.model.GraphicInfo;
 import org.activiti.engine.RepositoryService;
 import org.activiti.engine.repository.Model;
+import org.apache.commons.io.FileUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -50,24 +51,13 @@ public class PhotoServiceImpl implements PhotoService {
             // 新增模型数据并增加模型的xml和图片
             String filename = file.getOriginalFilename();
             InputStream is = file.getInputStream();
-            asFile(is);
+            File file_ = new File(filename);
+            FileUtils.copyInputStreamToFile(is, file_);
             return true;
         } catch (Exception e) {
             log.error("文件解释出错，请检查文件是否为bpmn2.0标准格式", e);
             throw new ProcessException("文件解释出错，请检查文件是否为bpmn2.0标准格式");
         }
-    }
-
-    public static File asFile(InputStream inputStream) throws IOException {
-        File tmp = File.createTempFile("lzq", ".tmp", new File("C:\\"));
-        OutputStream os = new FileOutputStream(tmp);
-        int bytesRead = 0;
-        byte[] buffer = new byte[8192];
-        while ((bytesRead = inputStream.read(buffer, 0, 8192)) != -1) {
-            os.write(buffer, 0, bytesRead);
-        }
-        inputStream.close();
-        return tmp;
     }
 
     /**

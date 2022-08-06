@@ -29,7 +29,6 @@ $(document).ready(function(){
 				$("#mail").val(obj.mail);
 				$("#user_id").val(obj.user_id);
 				$("#applytime").val(obj.apply_time);
-				$("form").attr("action","/task/completebymanager/"+taskid);
 			});
 			$("#manager").show();
 		});
