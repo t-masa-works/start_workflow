@@ -3358,7 +3358,7 @@ $(document).ready(function () {
 	if (ajax_url.length < 1) {
 		ajax_url = 'processlist';
 	}
-	LoadAjaxContent(ajax_url);
+	//LoadAjaxContent(ajax_url);
 	var item = $('.main-menu li a[href$="' + ajax_url + '"]');
 	item.addClass('active-parent active');
 	$('.dropdown:has(li:has(a.active)) > a').addClass('active-parent active');
@@ -3492,7 +3492,7 @@ $(document).ready(function () {
 	$('#about').on('mouseleave', function(){
 		$('#about').removeClass('about-h');
 	})
-	$.get("currentuser",function(data){
+	$.get("/currentuser",function(data){
 		   $("#currentuser").text(data.state);
 		});
 });

@@ -82,6 +82,16 @@
     </serviceTask>
     <userTask id="Activity_1h62z9e" name="check user certificate" activiti:candidateGroups="ManagerGroup"></userTask>
     <intermediateThrowEvent id="Event_0q77ktv" name="receive mail"></intermediateThrowEvent>
+    <sequenceFlow id="Flow_1ud3pa9" sourceRef="Activity_0n8d5ub" targetRef="Event_1deh18b"></sequenceFlow>
+    <sequenceFlow id="Flow_11tvsii" sourceRef="Activity_1qqzmpm" targetRef="Event_0ptukct"></sequenceFlow>
+    <sequenceFlow id="Flow_1klkdr2" sourceRef="Event_0q77ktv" targetRef="Activity_1h62z9e"></sequenceFlow>
+    <sequenceFlow id="Flow_0wuf03s" sourceRef="Activity_1h62z9e" targetRef="Gateway_0u2dd4h"></sequenceFlow>
+    <sequenceFlow id="Flow_0tr4wtj" name="NG" sourceRef="Gateway_0u2dd4h" targetRef="Activity_0n8d5ub">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${managerapprove=='false'}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="Flow_0faflpd" name="OK" sourceRef="Gateway_0u2dd4h" targetRef="Activity_1qqzmpm">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${managerapprove=='true'}]]></conditionExpression>
+    </sequenceFlow>
     <startEvent id="Event_0wpgtb3" name="start" activiti:initiator="${applyuserid}"></startEvent>
     <endEvent id="Event_14fjw5m" name="end"></endEvent>
     <intermediateThrowEvent id="Event_1dtgb4n" name="receive OK mail"></intermediateThrowEvent>
@@ -112,33 +122,23 @@
         </activiti:field>
       </extensionElements>
     </serviceTask>
-    <exclusiveGateway id="Gateway_1ubzzqe" name="is OK?"></exclusiveGateway>
-    <manualTask id="Activity_1wwunt1" name="send OK mail"></manualTask>
-    <manualTask id="Activity_1gond5q" name="send NG mail"></manualTask>
-    <intermediateThrowEvent id="Event_0ptukct" name="receive mail"></intermediateThrowEvent>
-    <userTask id="Activity_06b2cev" name="check user certificate" activiti:candidateGroups="SeniorManagerGroup"></userTask>
-    <sequenceFlow id="Flow_1ud3pa9" sourceRef="Activity_0n8d5ub" targetRef="Event_1deh18b"></sequenceFlow>
-    <sequenceFlow id="Flow_11tvsii" sourceRef="Activity_1qqzmpm" targetRef="Event_0ptukct"></sequenceFlow>
-    <sequenceFlow id="Flow_1klkdr2" sourceRef="Event_0q77ktv" targetRef="Activity_1h62z9e"></sequenceFlow>
-    <sequenceFlow id="Flow_0wuf03s" sourceRef="Activity_1h62z9e" targetRef="Gateway_0u2dd4h"></sequenceFlow>
     <sequenceFlow id="Flow_19oek8c" sourceRef="Event_1dtgb4n" targetRef="Event_14fjw5m"></sequenceFlow>
     <sequenceFlow id="Flow_0xcwace" sourceRef="Activity_0eym7uw" targetRef="Activity_0s3el5b"></sequenceFlow>
     <sequenceFlow id="Flow_1qlc73q" sourceRef="Activity_0s3el5b" targetRef="Event_0q77ktv"></sequenceFlow>
     <sequenceFlow id="Flow_0jy0v9y" sourceRef="Activity_0tnrj3n" targetRef="Activity_0eym7uw"></sequenceFlow>
     <sequenceFlow id="Flow_0jwojye" sourceRef="Event_1deh18b" targetRef="Activity_0tnrj3n"></sequenceFlow>
+    <sequenceFlow id="Flow_1c4qqzl" sourceRef="Event_0wpgtb3" targetRef="Activity_0eym7uw"></sequenceFlow>
+    <exclusiveGateway id="Gateway_1ubzzqe" name="is OK?"></exclusiveGateway>
+    <manualTask id="Activity_1wwunt1" name="send OK mail"></manualTask>
+    <manualTask id="Activity_1gond5q" name="send NG mail"></manualTask>
+    <intermediateThrowEvent id="Event_0ptukct" name="receive mail"></intermediateThrowEvent>
+    <userTask id="Activity_06b2cev" name="check user certificate" activiti:candidateGroups="SeniorManagerGroup"></userTask>
     <sequenceFlow id="Flow_0eponq2" sourceRef="Event_0ptukct" targetRef="Activity_06b2cev"></sequenceFlow>
     <sequenceFlow id="Flow_1wtbok8" sourceRef="Activity_1wwunt1" targetRef="Event_1dtgb4n"></sequenceFlow>
     <sequenceFlow id="Flow_0efcch5" sourceRef="Activity_1gond5q" targetRef="Event_1deh18b"></sequenceFlow>
     <sequenceFlow id="Flow_0aw61g6" sourceRef="Activity_06b2cev" targetRef="Gateway_1ubzzqe"></sequenceFlow>
     <sequenceFlow id="Flow_1n0g9tr" name="OK" sourceRef="Gateway_1ubzzqe" targetRef="Activity_1wwunt1"></sequenceFlow>
     <sequenceFlow id="Flow_0mf5xwy" name="NG" sourceRef="Gateway_1ubzzqe" targetRef="Activity_1gond5q"></sequenceFlow>
-    <sequenceFlow id="Flow_1c4qqzl" sourceRef="Event_0wpgtb3" targetRef="Activity_0eym7uw"></sequenceFlow>
-    <sequenceFlow id="Flow_0tr4wtj" name="NG" sourceRef="Gateway_0u2dd4h" targetRef="Activity_0n8d5ub">
-      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${managerapprove=='false'}]]></conditionExpression>
-    </sequenceFlow>
-    <sequenceFlow id="Flow_0faflpd" name="OK" sourceRef="Gateway_0u2dd4h" targetRef="Activity_1qqzmpm">
-      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${managerapprove=='true'}]]></conditionExpression>
-    </sequenceFlow>
   </process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_Collaboration">
     <bpmndi:BPMNPlane bpmnElement="Collaboration" id="BPMNPlane_Collaboration">
@@ -206,7 +206,7 @@
         <omgdc:Bounds height="80.0" width="100.0" x="1049.0" y="504.0"></omgdc:Bounds>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge bpmnElement="Flow_19oek8c" id="BPMNEdge_Flow_19oek8c">
-        <omgdi:waypoint x="1251.0" y="154.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1250.0" y="153.0"></omgdi:waypoint>
         <omgdi:waypoint x="1411.0" y="153.0"></omgdi:waypoint>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge bpmnElement="Flow_0jwojye" id="BPMNEdge_Flow_0jwojye">
@@ -216,7 +216,7 @@
         <omgdi:waypoint x="429.0" y="217.0"></omgdi:waypoint>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge bpmnElement="Flow_0eponq2" id="BPMNEdge_Flow_0eponq2">
-        <omgdi:waypoint x="961.0" y="541.0"></omgdi:waypoint>
+        <omgdi:waypoint x="960.0" y="541.0"></omgdi:waypoint>
         <omgdi:waypoint x="1049.0" y="543.0"></omgdi:waypoint>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge bpmnElement="Flow_0aw61g6" id="BPMNEdge_Flow_0aw61g6">
@@ -237,59 +237,59 @@
         <omgdi:waypoint x="429.0" y="217.0"></omgdi:waypoint>
         <omgdi:waypoint x="439.0" y="217.0"></omgdi:waypoint>
         <omgdi:waypoint x="439.0" y="157.0"></omgdi:waypoint>
-        <omgdi:waypoint x="449.0" y="154.0"></omgdi:waypoint>
+        <omgdi:waypoint x="449.0" y="153.0"></omgdi:waypoint>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge bpmnElement="Flow_1klkdr2" id="BPMNEdge_Flow_1klkdr2">
-        <omgdi:waypoint x="631.0" y="330.0"></omgdi:waypoint>
+        <omgdi:waypoint x="630.0" y="330.0"></omgdi:waypoint>
         <omgdi:waypoint x="679.0" y="331.0"></omgdi:waypoint>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge bpmnElement="Flow_11tvsii" id="BPMNEdge_Flow_11tvsii">
-        <omgdi:waypoint x="948.0" y="463.0"></omgdi:waypoint>
+        <omgdi:waypoint x="947.0" y="463.0"></omgdi:waypoint>
         <omgdi:waypoint x="946.0" y="526.0"></omgdi:waypoint>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge bpmnElement="Flow_1wtbok8" id="BPMNEdge_Flow_1wtbok8">
         <omgdi:waypoint x="1309.0" y="504.0"></omgdi:waypoint>
         <omgdi:waypoint x="1309.0" y="321.0"></omgdi:waypoint>
         <omgdi:waypoint x="1239.0" y="321.0"></omgdi:waypoint>
-        <omgdi:waypoint x="1236.0" y="169.0"></omgdi:waypoint>
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge bpmnElement="Flow_1n0g9tr" id="BPMNEdge_Flow_1n0g9tr">
-        <omgdi:waypoint x="1223.0" y="541.0"></omgdi:waypoint>
-        <omgdi:waypoint x="1259.0" y="542.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1236.0" y="168.0"></omgdi:waypoint>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge bpmnElement="Flow_0faflpd" id="BPMNEdge_Flow_0faflpd">
         <omgdi:waypoint x="814.0" y="348.0"></omgdi:waypoint>
         <omgdi:waypoint x="814.0" y="423.0"></omgdi:waypoint>
         <omgdi:waypoint x="899.0" y="423.0"></omgdi:waypoint>
       </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="Flow_1n0g9tr" id="BPMNEdge_Flow_1n0g9tr">
+        <omgdi:waypoint x="1223.0" y="540.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1259.0" y="542.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="Flow_0tr4wtj" id="BPMNEdge_Flow_0tr4wtj">
+        <omgdi:waypoint x="833.0" y="328.0"></omgdi:waypoint>
+        <omgdi:waypoint x="899.0" y="331.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge bpmnElement="Flow_0mf5xwy" id="BPMNEdge_Flow_0mf5xwy">
         <omgdi:waypoint x="1204.0" y="560.0"></omgdi:waypoint>
         <omgdi:waypoint x="1204.0" y="635.0"></omgdi:waypoint>
         <omgdi:waypoint x="1259.0" y="635.0"></omgdi:waypoint>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge bpmnElement="Flow_0tr4wtj" id="BPMNEdge_Flow_0tr4wtj">
-        <omgdi:waypoint x="833.0" y="329.0"></omgdi:waypoint>
-        <omgdi:waypoint x="899.0" y="331.0"></omgdi:waypoint>
-      </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge bpmnElement="Flow_0xcwace" id="BPMNEdge_Flow_0xcwace">
         <omgdi:waypoint x="549.0" y="137.0"></omgdi:waypoint>
         <omgdi:waypoint x="569.0" y="137.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="Flow_1c4qqzl" id="BPMNEdge_Flow_1c4qqzl">
+        <omgdi:waypoint x="271.0" y="134.0"></omgdi:waypoint>
+        <omgdi:waypoint x="449.0" y="136.0"></omgdi:waypoint>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge bpmnElement="Flow_0efcch5" id="BPMNEdge_Flow_0efcch5">
         <omgdi:waypoint x="1359.0" y="635.0"></omgdi:waypoint>
         <omgdi:waypoint x="1419.0" y="635.0"></omgdi:waypoint>
         <omgdi:waypoint x="1419.0" y="297.0"></omgdi:waypoint>
-        <omgdi:waypoint x="1010.0" y="159.0"></omgdi:waypoint>
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge bpmnElement="Flow_1c4qqzl" id="BPMNEdge_Flow_1c4qqzl">
-        <omgdi:waypoint x="272.0" y="134.0"></omgdi:waypoint>
-        <omgdi:waypoint x="449.0" y="136.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1010.0" y="158.0"></omgdi:waypoint>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge bpmnElement="Flow_1ud3pa9" id="BPMNEdge_Flow_1ud3pa9">
         <omgdi:waypoint x="999.0" y="333.0"></omgdi:waypoint>
         <omgdi:waypoint x="1110.0" y="333.0"></omgdi:waypoint>
         <omgdi:waypoint x="1110.0" y="157.0"></omgdi:waypoint>
-        <omgdi:waypoint x="1011.0" y="154.0"></omgdi:waypoint>
+        <omgdi:waypoint x="1010.0" y="154.0"></omgdi:waypoint>
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>

@@ -265,7 +265,7 @@
 		$("#userRegisterApply").click(function(){
 			$.post("startUserRegister",$("form").serialize(),function(){
 				alert("apply success");
-				LoadAjaxContent("inputInfo");
+				document.location = "/user/upload_user_certificate";
 			});
 		});
 	});
