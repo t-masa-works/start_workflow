@@ -13,6 +13,10 @@ spring:
     hikari:
       poolName: Hikari
       auto-commit: false
+  jackson:
+    date-format: io.swagger.RFC3339DateFormat
+    serialization:
+      WRITE_DATES_AS_TIMESTAMPS: 'false'
 
   #freemarker模板配置
   freemarker:
@@ -40,6 +44,8 @@ spring:
     enabled: false
 
 server:
+  servlet:
+    contextPath: /
   port: 8082
 
 log:
@@ -54,6 +60,11 @@ logging:
     boot:
       spring:
         controller: DEBUG
+springfox:
+  documentation:
+    open-api:
+      v3:
+        path: /api-docs
 
 #mybatis
 mybatis:

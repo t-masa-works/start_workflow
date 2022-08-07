@@ -17,12 +17,16 @@
 	<properties>
 		<java.version>1.8</java.version>
 		<activiti.version>6.0.0</activiti.version>
-		<springfox-swagger2.version>2.9.2</springfox-swagger2.version>
+		<springfox-version>3.0.0</springfox-version>
+		<springfox-swagger2.version>3.0.0</springfox-swagger2.version>
 		<io.swagger.version>1.5.22</io.swagger.version>
 		<hutool.version>4.2.1</hutool.version>
         <mysql.version>8.0.16</mysql.version>
         <validation.version>2.0.1.Final</validation.version>
 		<apache.xmlgraphics.version>1.7</apache.xmlgraphics.version>
+		<jib-maven-plugin.version>3.2.1</jib-maven-plugin.version>
+		<jib-maven-plugin.image>eclipse-temurin:11-jre-focal</jib-maven-plugin.image>
+		<jib-maven-plugin.architecture>amd64</jib-maven-plugin.architecture>
 	</properties>
 
 	<dependencies>
@@ -45,7 +49,11 @@
 			<groupId>com.zaxxer</groupId>
 			<artifactId>HikariCP</artifactId>
 		</dependency>
-
+        <dependency>
+            <groupId>org.springframework.plugin</groupId>
+            <artifactId>spring-plugin-core</artifactId>
+            <version>2.0.0.RELEASE</version>
+        </dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-freemarker</artifactId>
@@ -55,6 +63,12 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
+
+        <dependency>
+            <groupId>com.github.joschi.jackson</groupId>
+            <artifactId>jackson-datatype-threetenbp</artifactId>
+            <version>2.6.4</version>
+        </dependency>
 
 		<!--activiti -->
 		<dependency>
@@ -119,8 +133,18 @@
 			<artifactId>batik-svggen</artifactId>
 			<version>${apache.xmlgraphics.version}</version>
 		</dependency>
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>31.1-jre</version>
+        </dependency>
 
 		<!-- swagger相关依赖 -->
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-oas</artifactId>
+            <version>${springfox-version}</version>
+        </dependency>
 		<dependency>
 			<groupId>io.springfox</groupId>
 			<artifactId>springfox-swagger2</artifactId>
@@ -190,11 +214,63 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
-			<plugin>
-				<groupId>com.github.kongchen</groupId>
-				<artifactId>swagger-maven-plugin</artifactId>
-			</plugin>
+            <plugin>
+                <groupId>com.google.cloud.tools</groupId>
+                <artifactId>jib-maven-plugin</artifactId>
+            </plugin>
 		</plugins>
+        <pluginManagement>
+            <plugins>
+				<plugin>
+					<groupId>com.google.cloud.tools</groupId>
+					<artifactId>jib-maven-plugin</artifactId>
+					<version>${jib-maven-plugin.version}</version>
+					<configuration>
+						<from>
+							<image>${jib-maven-plugin.image}</image>
+							<platforms>
+								<platform>
+									<architecture>${jib-maven-plugin.architecture}</architecture>
+									<os>linux</os>
+								</platform>
+							</platforms>
+						</from>
+						<to>
+							<image>jhipstersampleapplication:latest</image>
+						</to>
+						<container>
+							<entrypoint>
+								<shell>bash</shell>
+								<option>-c</option>
+								<arg>/entrypoint.sh</arg>
+							</entrypoint>
+							<ports>
+								<port>8080</port>
+							</ports>
+							<environment>
+								<SPRING_OUTPUT_ANSI_ENABLED>ALWAYS</SPRING_OUTPUT_ANSI_ENABLED>
+								<JHIPSTER_SLEEP>0</JHIPSTER_SLEEP>
+							</environment>
+							<creationTime>USE_CURRENT_TIMESTAMP</creationTime>
+							<user>1000</user>
+						</container>
+						<extraDirectories>
+							<paths>src/main/docker/jib</paths>
+							<permissions>
+								<permission>
+									<file>/entrypoint.sh</file>
+									<mode>755</mode>
+								</permission>
+							</permissions>
+						</extraDirectories>
+					</configuration>
+				</plugin>
+                <plugin>
+                    <groupId>com.github.kongchen</groupId>
+                    <artifactId>swagger-maven-plugin</artifactId>
+                </plugin>
+            </plugins>
+        </pluginManagement>
 	</build>
 
 </project>

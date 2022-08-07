@@ -1,6 +1,7 @@
 package com.activiti6;
 
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
 import springfox.documentation.builders.ApiInfoBuilder;
@@ -20,7 +21,7 @@ public class Swagger2 {
 		return new Docket(DocumentationType.SWAGGER_2)
 				.apiInfo(apiInfo())
 				.select()
-				.apis(RequestHandlerSelectors.basePackage("com.activiti6.controller"))
+				.apis(RequestHandlerSelectors.basePackage("io.swagger"))
 				.paths(PathSelectors.any())
 				.build();
 	}
