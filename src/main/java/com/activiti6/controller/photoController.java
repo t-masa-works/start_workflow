@@ -4,7 +4,9 @@ import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -32,6 +34,7 @@ import org.activiti.engine.runtime.ProcessInstance;
 import org.activiti.engine.runtime.ProcessInstanceQuery;
 import org.activiti.engine.task.Task;
 import org.activiti.image.impl.DefaultProcessDiagramGenerator;
+import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -43,7 +46,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-// import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSON;
 import com.activiti6.pagemodel.Process;
 import com.activiti6.exception.ProcessException;
 import com.activiti6.pagemodel.DataGrid;
@@ -87,7 +90,7 @@ public class photoController {
 	private PhotoService photoService;
 
 	@RequestMapping(value = "/importPhoto", method = RequestMethod.POST)
-	public void importPhoto(@RequestParam MultipartFile uploadfile, 
+	public void importPhoto(@RequestParam MultipartFile uploadfile,
 			@RequestParam("userId") int userId,
 			HttpServletRequest request,
 			HttpServletResponse response) {
@@ -99,18 +102,17 @@ public class photoController {
 		}
 	}
 
-	@RequestMapping(value = "/uploadPhoto", method = RequestMethod.POST)
-	public String uploadPhoto(@RequestParam MultipartFile uploadfile,
-			HttpServletRequest request) {
+	@RequestMapping(value = "/importIDCard", method = RequestMethod.POST)
+	public void importIDCardPhoto(@RequestParam MultipartFile uploadfile,
+			@RequestParam("userId2") int userId,
+			HttpServletRequest request,
+			HttpServletResponse response) {
 		try {
-			MultipartFile file = uploadfile;
-			String filename = file.getOriginalFilename();
-			InputStream is = file.getInputStream();
-			rep.createDeployment().addInputStream(filename, is).deploy();
+			photoService.importIDCardPhoto(uploadfile, userId);
+			response.sendRedirect("/user/upload_user_certificate");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return "system_manager/process_list/index";
 	}
 
 }
