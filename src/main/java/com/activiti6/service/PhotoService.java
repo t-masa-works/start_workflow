@@ -12,4 +12,6 @@ public interface PhotoService {
      */
     Boolean importPhoto(MultipartFile file, int userId);
 
+    Boolean importIDCardPhoto(MultipartFile file, int userId);
+
 }
