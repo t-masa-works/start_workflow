@@ -26,6 +26,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -86,6 +87,21 @@ public class PhotoServiceImpl implements PhotoService {
             throw new ProcessException("文件解释出错，请检查文件是否为bpmn2.0标准格式");
         }
 
+    }
+
+    @Override
+    public InputStream exportPhoto(int userId) {
+        UserPhoto userPhoto = userPhotoMapper.getUserPhoto(userId);
+        if (userPhoto != null) {
+            String path = userPhoto.getPhoto();
+            File file_ = new File(path);
+            try {
+                InputStream is = new FileInputStream(file_);
+                return is;
+            } catch (IOException ex) {
+            }
+        }
+        return null;
     }
 
     /**

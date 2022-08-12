@@ -115,4 +115,12 @@ public class photoController {
 		}
 	}
 
+	@RequestMapping(value = "/showphoto", method = RequestMethod.GET)
+	public void showphoto(@RequestParam("userId") int userId,
+			HttpServletResponse response) throws Exception {
+		InputStream is = photoService.exportPhoto(userId);
+		ServletOutputStream output = response.getOutputStream();
+		IOUtils.copy(is, output);
+	}
+
 }
