@@ -123,4 +123,11 @@ public class photoController {
 		IOUtils.copy(is, output);
 	}
 
+	@RequestMapping(value = "/showIDCardphoto", method = RequestMethod.GET)
+	public void showIDCardphoto(@RequestParam("userId") int userId,
+			HttpServletResponse response) throws Exception {
+		InputStream is = photoService.exportIDCardPhoto(userId);
+		ServletOutputStream output = response.getOutputStream();
+		IOUtils.copy(is, output);
+	}
 }
