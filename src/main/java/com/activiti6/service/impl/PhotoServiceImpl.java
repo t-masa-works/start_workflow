@@ -141,4 +141,19 @@ public class PhotoServiceImpl implements PhotoService {
 
     }
 
+    @Override
+    public InputStream exportIDCardPhoto(int userId) {
+        UserPhoto userPhoto = userPhotoMapper.getUserPhoto(userId);
+        if (userPhoto != null) {
+            String path = userPhoto.getIDCardphoto();
+            File file_ = new File(path);
+            try {
+                InputStream is = new FileInputStream(file_);
+                return is;
+            } catch (IOException ex) {
+            }
+        }
+        return null;
+    }
+
 }
