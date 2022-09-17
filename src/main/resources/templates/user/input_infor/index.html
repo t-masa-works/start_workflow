@@ -211,7 +211,7 @@
 					<div class="no-move"></div>
 				</div>
 				<div class="box-content">
-					<form role="form" action="startleave" method="post">
+					<form role="form" action="/startUserRegister" method="post">
 							<div class="form-group">
 								<label>username</label>
 								<input id="username" class="form-control" name="username"/>
@@ -262,7 +262,7 @@
 <script type="text/javascript">
 	$(document).ready(function(){
 		$("#userRegisterApply").click(function(){
-			$.post("startUserRegister",$("form").serialize(),function(){
+			$.post("/startUserRegister",$("form").serialize(),function(){
 				alert("apply success");
 				document.location = "/user/upload_user_certificate";
 			});

@@ -1,0 +1,22 @@
+{
+    "configurations": [
+        {
+            "name": "Python: Current File",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "cwd": "${workspaceFolder}/FinRL-Library"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-Activiti6DemoApplication<activiti-workflow>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.activiti6.Activiti6DemoApplication",
+            "projectName": "activiti-workflow",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}
