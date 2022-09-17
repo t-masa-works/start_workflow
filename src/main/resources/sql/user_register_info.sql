@@ -12,11 +12,11 @@ CREATE TABLE `user_register_info` (
   `superManager_check_time` varchar(45) DEFAULT NULL,
   `remarks` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
 
 CREATE TABLE `user_photo_info` (
   `id` int(11) NOT NULL ,
   `photo` varchar(45) DEFAULT NULL,
   `IDCardphoto` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;

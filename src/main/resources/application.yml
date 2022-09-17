@@ -5,7 +5,7 @@ spring:
     active: dev
   #数据源配置
   datasource:
-    url: jdbc:mysql://localhost:3306/activiti?useUnicode=yes&characterEncoding=UTF-8&useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true&nullCatalogMeansCurrent=true
+    url: jdbc:mysql://localhost:8889/activiti?useUnicode=yes&characterEncoding=UTF-8&useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true&nullCatalogMeansCurrent=true
     username: activiti
     password: activiti
     driverClassName: com.mysql.cj.jdbc.Driver
