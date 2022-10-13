@@ -56,8 +56,8 @@ public class userRegisterController {
 	SystemService systemservice;
 	@Autowired
 	UserRegisterService userRegisterService;
-    @Autowired
-    private ProcessInstanceService processInstanceService;
+	@Autowired
+	private ProcessInstanceService processInstanceService;
 
 	@RequestMapping(value = "/user/input_infor", method = RequestMethod.GET)
 	public String inputInfo() {
@@ -153,7 +153,8 @@ public class userRegisterController {
 	@RequestMapping(value = "/seniormanagertasklist", produces = {
 			"application/json;charset=UTF-8" }, method = RequestMethod.POST)
 	@ResponseBody
-	public DataGrid<UserRegisterInfoTask> getSeniorManagerTaskList(HttpSession session, @RequestParam("current") int current,
+	public DataGrid<UserRegisterInfoTask> getSeniorManagerTaskList(HttpSession session,
+			@RequestParam("current") int current,
 			@RequestParam("rowCount") int rowCount) {
 		DataGrid<UserRegisterInfoTask> grid = new DataGrid<UserRegisterInfoTask>();
 		grid.setRowCount(rowCount);
@@ -252,7 +253,8 @@ public class userRegisterController {
 		Task task = taskservice.createTaskQuery().taskId(taskid).singleResult();
 		ProcessInstance process = runservice.createProcessInstanceQuery().processInstanceId(task.getProcessInstanceId())
 				.singleResult();
-		UserRegisterInfo userRegisterInfo = userRegisterService.getUserRegisterInfo(new Integer(process.getBusinessKey()));
+		UserRegisterInfo userRegisterInfo = userRegisterService
+				.getUserRegisterInfo(new Integer(process.getBusinessKey()));
 		return userRegisterInfo;
 	}
 
@@ -273,7 +275,8 @@ public class userRegisterController {
 
 	@RequestMapping(value = "/task/userCertificateUpload/{taskid}", method = RequestMethod.POST)
 	@ResponseBody
-	public MSG userCertificateUpload(HttpSession session, @PathVariable("taskid") String taskid, HttpServletRequest req) {
+	public MSG userCertificateUpload(HttpSession session, @PathVariable("taskid") String taskid,
+			HttpServletRequest req) {
 		String userid = (String) session.getAttribute("username");
 		Map<String, Object> variables = new HashMap<String, Object>();
 		processInstanceService.initProcessConfig();
@@ -313,9 +316,10 @@ public class userRegisterController {
 
 	@RequestMapping(value = "/task/updatereapply/{taskid}", method = RequestMethod.POST)
 	@ResponseBody
-	public MSG updateReapply(@PathVariable("taskid") String taskid, @ModelAttribute("userRegisterInfo") UserRegisterInfo userRegisterInfo,
+	public MSG updateReapply(@PathVariable("taskid") String taskid,
+			@ModelAttribute("userRegisterInfo") UserRegisterInfo userRegisterInfo,
 			@RequestParam("reapply") String reapply) {
-				userRegisterService.updateReapply(taskid, userRegisterInfo, reapply);
+		userRegisterService.updateReapply(taskid, userRegisterInfo, reapply);
 		return new MSG("success");
 	}
 
@@ -327,7 +331,8 @@ public class userRegisterController {
 		String userid = (String) session.getAttribute("username");
 		ProcessInstanceQuery query = runservice.createProcessInstanceQuery();
 		int total = (int) query.count();
-		List<ProcessInstance> a = query.processDefinitionKey("userregiste").involvedUser(userid).listPage(firstrow, rowCount);
+		List<ProcessInstance> a = query.processDefinitionKey("userregiste").involvedUser(userid).listPage(firstrow,
+				rowCount);
 		List<RunningProcess> list = new ArrayList<RunningProcess>();
 		for (ProcessInstance p : a) {
 			RunningProcess process = new RunningProcess();
@@ -421,7 +426,6 @@ public class userRegisterController {
 		IOUtils.copy(in, output);
 	}
 
-
 	@RequestMapping(value = "setupprocesslist", method = RequestMethod.POST)
 	@ResponseBody
 	public DataGrid<RunningProcess> setupprocess(HttpSession session, @RequestParam("current") int current,
@@ -431,7 +435,8 @@ public class userRegisterController {
 		System.out.print(userid);
 		ProcessInstanceQuery query = runservice.createProcessInstanceQuery();
 		int total = (int) query.count();
-		List<ProcessInstance> a = query.processDefinitionKey("userregiste").involvedUser(userid).listPage(firstrow, rowCount);
+		List<ProcessInstance> a = query.processDefinitionKey("userregiste").involvedUser(userid).listPage(firstrow,
+				rowCount);
 		List<RunningProcess> list = new ArrayList<RunningProcess>();
 		for (ProcessInstance p : a) {
 			RunningProcess process = new RunningProcess();

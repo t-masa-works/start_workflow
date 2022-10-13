@@ -20,3 +20,12 @@ CREATE TABLE `user_photo_info` (
   `IDCardphoto` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `user_company_account` (
+  `id` int(11) NOT NULL ,
+  `company_name` varchar(20) DEFAULT NULL,
+  `bank_name` varchar(20) DEFAULT NULL,
+  `account` varchar(45) DEFAULT NULL,
+  `account_number` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
