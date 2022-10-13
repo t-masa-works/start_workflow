@@ -5,14 +5,14 @@
 <mapper namespace="com.activiti6.mapper.UserCompanyAccountMapper">
 	<resultMap id="BaseResultMap" type="com.activiti6.po.UserCompanyAccount">
 	    <id column="id" jdbcType="INTEGER" property="id" />
-		<result column="company_name" jdbcType="VARCHAR" property="company_name" />
-	    <result column="bank_name" jdbcType="VARCHAR" property="bank_name" />
+		<result column="company_name" jdbcType="VARCHAR" property="companyName" />
+	    <result column="bank_name" jdbcType="VARCHAR" property="bankName" />
 	    <result column="account" jdbcType="VARCHAR" property="account" />
-	    <result column="account_number" jdbcType="VARCHAR" property="account_number" />
+	    <result column="account_number" jdbcType="VARCHAR" property="accountNumber" />
 	</resultMap>
 	
 	<select id="getUserCompanyAccount" resultType="com.activiti6.po.UserCompanyAccount" parameterType="int">
-		select * from user_company_account where id=#{id} 
+		select * from user_company_account where id=#{id}
 	</select>
 	
 	<insert id="save" useGeneratedKeys="true" keyProperty="id" parameterType="com.activiti6.po.UserCompanyAccount">

@@ -12,13 +12,13 @@ public class UserCompanyAccount implements Serializable {
     @ApiModelProperty("id")
     int id;
     @ApiModelProperty("company_name")
-    String company_name;
+    String companyName;
     @ApiModelProperty("bank_name")
-    String bank_name;
+    String bankName;
     @ApiModelProperty("account")
     String account;
     @ApiModelProperty("account_number")
-    String account_number;
+    String accountNumber;
     Task task;
 
     public int getId() {
@@ -29,20 +29,20 @@ public class UserCompanyAccount implements Serializable {
         this.id = id;
     }
 
-    public String getCompany_name() {
-        return company_name;
+    public String getCompanyName() {
+        return companyName;
     }
 
-    public void setCompany_name(String company_name) {
-        this.company_name = company_name;
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
     }
 
-    public String getBank_name() {
-        return bank_name;
+    public String getBankName() {
+        return bankName;
     }
 
-    public void setBank_name(String bank_name) {
-        this.bank_name = bank_name;
+    public void setBankName(String bankName) {
+        this.bankName = bankName;
     }
 
     public String getAccount() {
@@ -53,11 +53,11 @@ public class UserCompanyAccount implements Serializable {
         this.account = account;
     }
 
-    public String getAccount_number() {
-        return account_number;
+    public String getAccountNumber() {
+        return accountNumber;
     }
 
-    public void setIAccount_number(String account_number) {
-        this.account_number = account_number;
+    public void setIAccountNumber(String accountNumber) {
+        this.accountNumber = accountNumber;
     }
 }

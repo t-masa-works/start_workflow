@@ -1,6 +1,7 @@
 
 package com.activiti6.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -15,8 +16,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.activiti6.pagemodel.DataGrid;
 import com.activiti6.po.UserCompanyAccount;
 import com.activiti6.service.LeaveService;
 import com.activiti6.service.SystemService;
@@ -48,18 +51,25 @@ public class UserCompanyAccountController {
 		return "/user/show_company_account/index";
 	}
 
-	@RequestMapping(value = "/show_company_account", method = RequestMethod.POST)
+	@RequestMapping(value = "/show_company_account", produces = {
+		"application/json;charset=UTF-8" }, method = RequestMethod.POST)
 	@ResponseBody
-	public List<UserCompanyAccount> userCompanyAccountService(HttpSession session) {
-
+	public DataGrid<UserCompanyAccount> userCompanyAccountService(HttpSession session, @RequestParam("current") int current,
+	@RequestParam("rowCount") int rowCount) {
+		DataGrid<UserCompanyAccount> grid = new DataGrid<UserCompanyAccount>();
+		grid.setRowCount(rowCount);
+		grid.setCurrent(current);
+		grid.setTotal(0);
+		grid.setRows(new ArrayList<UserCompanyAccount>());
 		String userid = (String) session.getAttribute("username");
-
 		int uid = systemservice.getUidByusername(userid);
-
 		List<UserCompanyAccount> userCompanyAccounts = userCompanyAccountService.getUserCompanyAccount(uid);
-
-		return userCompanyAccounts;
-
+		
+		grid.setRowCount(rowCount);
+		grid.setCurrent(current);
+		grid.setTotal(userCompanyAccounts.size());
+		grid.setRows(userCompanyAccounts);
+		return grid;
 	}
 
 }
