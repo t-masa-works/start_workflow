@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.activiti6.mapper.UserCompanyAccountMapper">
+	<resultMap id="BaseResultMap" type="com.activiti6.po.UserCompanyAccount">
+	    <id column="id" jdbcType="INTEGER" property="id" />
+		<result column="company_name" jdbcType="VARCHAR" property="company_name" />
+	    <result column="bank_name" jdbcType="VARCHAR" property="bank_name" />
+	    <result column="account" jdbcType="VARCHAR" property="account" />
+	    <result column="account_number" jdbcType="VARCHAR" property="account_number" />
+	</resultMap>
+	
+	<select id="getUserCompanyAccount" resultType="com.activiti6.po.UserCompanyAccount" parameterType="int">
+		select * from user_company_account where id=#{id} 
+	</select>
+	
+	<insert id="save" useGeneratedKeys="true" keyProperty="id" parameterType="com.activiti6.po.UserCompanyAccount">
+	  insert into user_company_account (id,company_name,bank_name,account,account_number)
+	  values (#{id},#{company_name},#{bank_name},#{account},#{account_number})
+	</insert>
+	
+	<update id="updateByPrimaryKey" parameterType="com.activiti6.po.UserCompanyAccount">
+		 update user_company_account
+	    <set>
+	      <if test="company_name != null">
+	        company_name = #{company_name,jdbcType=VARCHAR},
+	      </if>
+	      <if test="bank_name != null">
+	        bank_name = #{bank_name,jdbcType=VARCHAR},
+	      </if>
+	      <if test="account != null">
+	        account = #{account,jdbcType=VARCHAR},
+	      </if>
+	      <if test="account_number != null">
+	        account_number = #{account_number,jdbcType=VARCHAR},
+	      </if>
+	    </set>
+	    where id = #{id,jdbcType=INTEGER}
+	</update>
+</mapper>
