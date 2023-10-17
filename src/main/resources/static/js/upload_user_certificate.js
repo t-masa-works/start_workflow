@@ -24,8 +24,10 @@ $(document).ready(function(){
 				var obj = data;
 				$("#userId").val(obj.id);
 				$("#userId2").val(obj.id);
+				$("#userId3").val(obj.id);
 				$("#imgphoto").src("/showphoto?userId="+obj.id);
 				$("#imgidCard").src("/showIDCardphoto?userId="+obj.id);
+				$("#imgpassportphoto").src("/showPassportphoto?userId="+obj.id);
 				$("#username").val(obj.username);
 				$("#password").val(obj.password);
 				$("#birthday").val(obj.birthday);

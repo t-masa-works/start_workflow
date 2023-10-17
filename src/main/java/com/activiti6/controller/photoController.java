@@ -115,6 +115,19 @@ public class photoController {
 		}
 	}
 
+	@RequestMapping(value = "/importPassport", method = RequestMethod.POST)
+	public void importPassportphoto(@RequestParam MultipartFile uploadfile,
+			@RequestParam("userId3") int userId,
+			HttpServletRequest request,
+			HttpServletResponse response) {
+		try {
+			photoService.importPassportphoto(uploadfile, userId);
+			response.sendRedirect("/user/upload_user_certificate");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
 	@RequestMapping(value = "/showphoto", method = RequestMethod.GET)
 	public void showphoto(@RequestParam("userId") int userId,
 			HttpServletResponse response) throws Exception {
@@ -127,6 +140,14 @@ public class photoController {
 	public void showIDCardphoto(@RequestParam("userId") int userId,
 			HttpServletResponse response) throws Exception {
 		InputStream is = photoService.exportIDCardPhoto(userId);
+		ServletOutputStream output = response.getOutputStream();
+		IOUtils.copy(is, output);
+	}
+
+	@RequestMapping(value = "/showPassportphoto", method = RequestMethod.GET)
+	public void showPassportphoto(@RequestParam("userId") int userId,
+			HttpServletResponse response) throws Exception {
+		InputStream is = photoService.exportPassportphoto(userId);
 		ServletOutputStream output = response.getOutputStream();
 		IOUtils.copy(is, output);
 	}

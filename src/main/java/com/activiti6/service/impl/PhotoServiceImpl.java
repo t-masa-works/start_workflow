@@ -155,5 +155,56 @@ public class PhotoServiceImpl implements PhotoService {
         }
         return null;
     }
+    /**
+     * 根据bpmn文件导入增加模型
+     *
+     * @param file 上传的文件
+     * @return 增加的模型信息
+     */
+    @Override
+    public Boolean importPassportphoto(MultipartFile file, int userId) {
+        try {
+            // 新增模型数据并增加模型的xml和图片
+            // 获取图片原始文件名
+            String filename = file.getOriginalFilename();
+            // 文件名使用当前时间
+            String name = new SimpleDateFormat("yyyyMMddHHmmssSSS").format(new Date());
+            // 获取上传图片的扩展名(jpg/png/...)
+            String extension = FilenameUtils.getExtension(filename);
+            // 图片上传的相对路径（因为相对路径放到页面上就可以显示图片）
+            String path = "/upload/" + name + "." + extension;
+            InputStream is = file.getInputStream();
+            File file_ = new File(path);
+            FileUtils.copyInputStreamToFile(is, file_);
+            UserPhoto userPhoto = new UserPhoto();
+            userPhoto.setId(userId);
+            userPhoto.setPassportphoto(path);
+            if (userPhotoMapper.getUserPhoto(userId) != null) {
+                userPhotoMapper.updateByPrimaryKey(userPhoto);
+            } else {
+                userPhotoMapper.save(userPhoto);
+            }
+            return true;
+        } catch (Exception e) {
+            log.error("文件解释出错，请检查文件是否为bpmn2.0标准格式", e);
+            throw new ProcessException("文件解释出错，请检查文件是否为bpmn2.0标准格式");
+        }
+
+    }
+
+    @Override
+    public InputStream exportPassportphoto(int userId) {
+        UserPhoto userPhoto = userPhotoMapper.getUserPhoto(userId);
+        if (userPhoto != null) {
+            String path = userPhoto.getPassportphoto();
+            File file_ = new File(path);
+            try {
+                InputStream is = new FileInputStream(file_);
+                return is;
+            } catch (IOException ex) {
+            }
+        }
+        return null;
+    }
 
 }
