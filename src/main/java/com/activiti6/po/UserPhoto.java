@@ -15,6 +15,8 @@ public class UserPhoto implements Serializable {
     String photo;
     @ApiModelProperty("IDCardphoto")
     String IDCardphoto;
+    @ApiModelProperty("Passportphoto")
+    String Passportphoto;
     Task task;
 
     public int getId() {
@@ -40,5 +42,14 @@ public class UserPhoto implements Serializable {
     public void setIDCardphoto(String IDCardphoto) {
         this.IDCardphoto = IDCardphoto;
     }
+
+    public String getPassportphoto() {
+        return Passportphoto;
+    }
+
+    public void setPassportphoto(String Passportphoto) {
+        this.Passportphoto = Passportphoto;
+    }
+
 
 }

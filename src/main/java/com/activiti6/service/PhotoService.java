@@ -19,4 +19,8 @@ public interface PhotoService {
     Boolean importIDCardPhoto(MultipartFile file, int userId);
 
     InputStream exportIDCardPhoto(int userId);
+
+    Boolean importPassportphoto(MultipartFile file, int userId);
+
+    InputStream exportPassportphoto(int userId);
 }

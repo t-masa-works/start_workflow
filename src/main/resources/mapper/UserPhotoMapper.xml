@@ -7,14 +7,15 @@
 	    <id column="id" jdbcType="INTEGER" property="id" />
 		<result column="photo" jdbcType="VARCHAR" property="photo" />
 	    <result column="IDCardphoto" jdbcType="VARCHAR" property="IDCardphoto" />
+	    <result column="Passportphoto" jdbcType="VARCHAR" property="Passportphoto" />
 	</resultMap>
 	<select id="getUserPhoto" resultType="com.activiti6.po.UserPhoto" parameterType="int">
 		select * from user_photo_info where id=#{id} 
 	</select>
 	
 	<insert id="save" useGeneratedKeys="false" keyProperty="id" parameterType="com.activiti6.po.UserPhoto">
-	  insert into user_photo_info (id,photo,IDCardphoto)
-	  values (#{id},#{photo},#{IDCardphoto})
+	  insert into user_photo_info (id,photo,IDCardphoto,Passportphoto)
+	  values (#{id},#{photo},#{IDCardphoto},#{Passportphoto})
 	</insert>
 	
 	<update id="updateByPrimaryKey" parameterType="com.activiti6.po.UserPhoto">
@@ -25,6 +26,9 @@
 	      </if>
 	      <if test="IDCardphoto != null">
 	        IDCardphoto = #{IDCardphoto,jdbcType=VARCHAR},
+	      </if>
+	      <if test="Passportphoto != null">
+	        Passportphoto = #{Passportphoto,jdbcType=VARCHAR},
 	      </if>
 
 	    </set>

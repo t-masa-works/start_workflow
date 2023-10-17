@@ -18,6 +18,7 @@ CREATE TABLE `user_photo_info` (
   `id` int(11) NOT NULL ,
   `photo` varchar(45) DEFAULT NULL,
   `IDCardphoto` varchar(45) DEFAULT NULL,
+  `Passportphoto` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 

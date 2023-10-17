@@ -266,6 +266,19 @@
 								    <img id="imgidCard" style="display: block;-webkit-user-select: none;margin: auto;background-color: hsl(0, 0%, 90%);transition: background-color 300ms;" src="/showIDCardphoto?userId=17">
 								</div>
 							</div>
+							<div class="box-content">
+								<div class="box-content">
+									<form id="upload" action="/importPassport" method="post" enctype="multipart/form-data">
+										<div class="form-group">
+											<label for="fileupload">importPassport</label> 
+											<input type="file" name="uploadfile" class="form-control" id="fileupload"/>
+											<input type="hidden" name="userId3" id="userId3"/>
+										</div>
+										<button type="submit" class="btn btn-primary">upload</button>
+									</form>
+								    <img id="imgpassportphoto" style="display: block;-webkit-user-select: none;margin: auto;background-color: hsl(0, 0%, 90%);transition: background-color 300ms;" src="/showimgPassportphoto?userId=17">
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
