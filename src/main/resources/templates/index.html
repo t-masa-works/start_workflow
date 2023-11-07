@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en-us">
+<html lang="en-us">         
+    <!-- JSON-LD 構造化マークアップ　SEO -->
     <meta charset="utf-8"><script type="application/ld+json">
     {
         "@context": "http://schema.org",
@@ -31,36 +32,38 @@
 <meta name="author" content="">
 <link rel="icon" href="/favicon.ico">
 
-
+<!-- ウェブページが共有された際に表示される情報 -->
 <meta itemprop="name" content="Highway Bitcoin">
 <meta itemprop="description" content="">
+<!-- og: OGPプロトコル　基本の４つ -->
 <meta property="og:title" content="Highway Bitcoin" />
 <meta property="og:description" content="" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="http://localhost:8082/" />
 
-
+<!-- twitterカード　ツイッターに投稿時表示される -->
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Highway Bitcoin"/>
 <meta name="twitter:description" content=""/>
 
-
+<!-- alternate スマホサイトの存在をGoogleに伝えるために記述するhtmlタグ -->
 <link rel="alternate" href="http://localhost:8082/index.xml" type="application/rss+xml" title="Highway Bitcoin"/>
 
 
 
 
-
+<!-- 検証用？？ -->
 <link rel="stylesheet" href="/css/vendor.min.0ddc5d5af2a374112e2c15ffd86dec5d04113f2dc0b68f5f4a729903ebbbbf46.css">    
 <body class="text-center">
         <main role="main" class="container">
 
-<h1 class="welcomeText"></h1>
+<h1 class="welcomeText display-1 font-weight-bold mb-5">Welcome!</h1>
 
 
     
-        
+<!-- Google検索フォーム -->
             <form id="search-form-Google" class="mb-3" action="https://www.google.com/search" method="get">
+                <!-- keycode 13 は、Enterキーのこと。Enterを押すことで、submitする -->
                 <input id="search-bar-Google" class="form-control" type="text" autofocus type="text" placeholder="Search Google" name="q" alt="Search Google" onkeydown="if(event.keyCode === 13) { this.form.submit(); return false; }">
             </form>
         
