@@ -13,10 +13,10 @@ import springfox.documentation.oas.annotations.EnableOpenApi;
 @EnableScheduling
 @ComponentScan(basePackages = { "com.activiti6.controller","com.activiti6.service",
 "io.swagger", "io.swagger.api", "io.swagger.configuration" })
-public class Activiti6DemoApplication {
 
+
+public class Activiti6DemoApplication {
     public static void main(String[] args) {
         SpringApplication.run(Activiti6DemoApplication.class, args);
     }
-
 }

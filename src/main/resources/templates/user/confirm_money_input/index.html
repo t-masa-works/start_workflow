@@ -10,8 +10,8 @@
              "@id": "http:\/\/localhost:8082\/"
         },
         "articleSection": "user",
-        "name": "Show_company_account",
-        "headline": "Show_company_account",
+        "name": "Confirm_Money_Input",
+        "headline": "Confirm_Money_Input",
         "description": "",
         "inLanguage": "en",
         "author": "",
@@ -22,7 +22,7 @@
         "copyrightYear": "2022",
         "datePublished": "2022-07-18T02:57:28Z",
         "dateModified": "2022-07-18T02:57:28Z",
-        "url" : "\/user\/show_company_account\/",
+        "url" : "\/user\/confirm_money_input\/",
         "wordCount" : "6",
         "keywords" : [ "Blog" ]
     }
@@ -126,7 +126,7 @@
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle">
                             <i class="fa fa-bars"></i>
-                            <span class="hidden-xs">input money</span>
+                            <span class="hidden-xs">input_money</span>
                         </a>
                         <ul class="dropdown-menu">
                             <li><a href="/user/input_money/show_company_account">show company account</a></li>
@@ -190,7 +190,7 @@
 		<ol class="breadcrumb pull-left">
 			<li><a href="/">top</a></li>
 			<li><a href="#">user</a></li>
-			<li><a href="#">show_company_account</a></li>
+			<li><a href="#">confirm_money_input</a></li>
 		</ol>
 	</div>
 </div>
@@ -200,7 +200,7 @@
 			<div class="box ui-draggable ui-droppable" id="dept">
 				<div class="box-header">
 					<div class="box-name">
-						<i class="fa fa-coffee"></i> <span>show_company_account</span>
+						<i class="fa fa-coffee"></i> <span>confirm_money_input</span>
 					</div>
 					<div class="box-icons">
 						<a class="collapse-link"> <i class="fa fa-chevron-up"></i>
@@ -211,22 +211,36 @@
 					<div class="no-move"></div>
 				</div>
 				<div class="box-content">
-						<table id="grid-data" class="table table-condensed table-hover table-striped">
-							<thead>
-								<tr>
-									
-									<th data-column-id="id" data-identifier="true" data-type="numeric">id</th>
-									<th data-column-id="company_name">company_name</th>
-									<th data-column-id="bank_name">bank_name</th>
-									<th data-column-id="account">account</th>
-									<th data-column-id="accountNumber">account_number</th>
-									<th data-formatter="commands">operation</th>
-								</tr>
-							</thead>
-						</table>
+					<!-- URL（/startCompanyRegister）に対してフォームに入力されたデータを送信（post）する -->
+					<form role="form" action="/startCompanyRegister" method="post">
+							<div class="form-group">
+								<label>company_name</label>
+								<input id="company_name" class="form-control" name="company_name"/>
+							</div>
+							<div class="form-group">
+								<label>bank_name</label>
+								<input id="bank_name" class="form-control" name="bank_name"/>
+							</div>
+							<div class="form-group">
+								<label>account</label>
+								<input id="account" class="form-control" name="account"/>
+							</div>
+							<div class="form-group">
+								<label>account_number</label>
+								<input id="account_number" class="form-control" name="account_number"/>
+							</div>
+							<button id="companyRegisterApply" type="button" class="btn btn-primary">register</button>
+							<button type="reset" class="btn btn-primary">Reset</button>
+					</form>
 				</div>
 			</div>
 		</div>
+	</div>
+</div>
+
+
+		</div>
+		
 	</div>
 </div>
 
@@ -242,7 +256,21 @@
 <script src="/js/jquery.bootgrid.min.js"></script>
 
 <script src="/js/devoops.js"></script>
-<script src="/js/show_company_account.js"></script>
-
+<script type="text/javascript">
+	// Webページが完全に読み込まれたら開始
+	$(document).ready(function(){
+		// id="companyRegisterApply"がクリックされたら、
+		$("#companyRegisterApply").click(function(){
+			// URL（/startCompanyRegister）に、フォーム内のデータをシリアライズ化して送信する
+			$.post("/startCompanyRegister",$("form").serialize(),function(){
+				// アラートで、apply successと表示させる
+				alert("apply success");
+				// /user/show_company_accountにリダイレクトする
+				document.location = "/user/show_company_account";
+			});
+		});
+	});
+	
+</script>
 </body>
 </html>

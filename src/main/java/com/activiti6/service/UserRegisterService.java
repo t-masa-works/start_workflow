@@ -8,9 +8,11 @@ import org.activiti.engine.runtime.ProcessInstance;
 import java.util.List;
 import java.util.Map;
 
-
+// ユーザー登録関連のロジック
 public interface UserRegisterService {
+	// 登録ワークフローの開始
 	public ProcessInstance startWorkflow(UserRegisterInfo userRegisterInfo,String userid,Map<String,Object> variables);
+	// 指定されたユーザーIDのタスクを指定された条件で取得
 	public List<UserRegisterInfo> getPageManagerTask(String userid,int firstrow,int rowcount);
 	public int getAllManagertask(String userid);
 	public UserRegisterInfo getUserRegisterInfo(int id);

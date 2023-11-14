@@ -34,7 +34,7 @@ public class UserRegisterServiceImpl implements UserRegisterService{
 		userRegisterInfo.setApply_time(new Date().toString());
 		userRegisterInfo.setUser_id(userid);
 		userRegisterInfoMapper.save(userRegisterInfo);
-		String businesskey=String.valueOf(userRegisterInfo.getId());//使用user_register_info表的主键作为businesskey,连接业务数据和流程数据
+		String businesskey=String.valueOf(userRegisterInfo.getId());// user_register_info テーブルの主キーをビジネスキーとして使用して、ビジネス データとプロセス データを接続します
 		identityservice.setAuthenticatedUserId(userid);
 		ProcessInstance instance=runtimeservice.startProcessInstanceByKey("userregiste",businesskey,variables);
 		System.out.println(businesskey);

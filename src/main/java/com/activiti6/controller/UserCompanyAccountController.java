@@ -1,8 +1,9 @@
-
 package com.activiti6.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -12,6 +13,7 @@ import org.activiti.engine.IdentityService;
 import org.activiti.engine.RepositoryService;
 import org.activiti.engine.RuntimeService;
 import org.activiti.engine.TaskService;
+import org.activiti.engine.runtime.ProcessInstance;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,7 +22,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.activiti6.pagemodel.DataGrid;
+import com.activiti6.pagemodel.MSG;
 import com.activiti6.po.UserCompanyAccount;
+import com.activiti6.po.UserRegisterInfo;
 import com.activiti6.service.LeaveService;
 import com.activiti6.service.SystemService;
 import com.activiti6.service.UserCompanyAccountService;
@@ -50,6 +54,25 @@ public class UserCompanyAccountController {
 	public String showCompanyAccount() {
 		return "/user/show_company_account/index";
 	}
+
+	@RequestMapping(value = "/user/input_money/confirm_money_input", method = RequestMethod.GET)
+	public String confirmMoneyInput() {
+		return "/user/confirm_money_input/index";
+	}
+
+	//startcompanyRegisterに送られたPOSTリクエストをこのメソッドで処理する
+	@RequestMapping(value = "/startCompanyRegister", method = RequestMethod.POST)
+	// シリアライズして送信するアノテーション
+	@ResponseBody
+	public MSG start_company_register(UserCompanyAccount userCompanyAccount, HttpSession session) {
+		String userid = (String) session.getAttribute("username");
+		Map<String, Object> variables = new HashMap<String, Object>();
+		variables.put("applyuserid", userid);
+		ProcessInstance ins = userCompanyAccountService.startWorkflow(userCompanyAccount, userid, variables);
+		System.out.println("user registerThe method startWorkflow(UserCompanyAccount, String, Map< is started. ID:" + ins.getId());
+		return new MSG("sucess");
+	}
+
 
 	@RequestMapping(value = "/show_company_account", produces = {
 		"application/json;charset=UTF-8" }, method = RequestMethod.POST)

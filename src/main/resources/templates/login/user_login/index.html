@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+				<!-- LiverReload　変更の監視、プラウザのリロードをしてくれる開発ツール、追加属性は遷移高速化OFF、ページ表示優先 -->
 	<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=8082&amp;path=livereload" data-no-instant defer></script>
 		<meta charset="utf-8"/>
 		<title>login</title>
@@ -7,8 +8,11 @@
 		<meta name="author" content="Evgeniya"/>
 		<meta name="keyword" content="keywords"/>
 		<meta name="viewport" content="width=device-width, initial-scale=1"/>
+		
 		<link href="/plugins/bootstrap/bootstrap.css" rel="stylesheet"/>
+		<!-- bootstrapCDN -->
 		<link href="http://netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.css" rel="stylesheet"/>
+		<!-- googleフォントCDN -->
 		<link href='http://fonts.googleapis.com/css?family=Righteous' rel='stylesheet' type='text/css'/>
 		<link href="/css/style_v1.css" rel="stylesheet"/>
 		
@@ -26,6 +30,7 @@
 					<div class="text-center">
 						<h3 class="page-header">HWB payment Login Page</h3>
 					</div>
+					<!-- ログイン情報をサーバーへ送信（post）するフォーム -->
 					<form action="/loginvalidate" method="post">
 					<div class="form-group">
 						<label class="control-label">Username</label>
@@ -36,7 +41,9 @@
 						<input type="password" class="form-control" name="password" />
 					</div>
 					<div class="text-center">
+						<!-- ログイン後にリダイレクトされるURLを指定　user/upload_user_certificate/indexへ飛ぶ -->
 						<input type="hidden" name="redirecturl" value="user/upload_user_certificate/index"/>
+						<!-- リンクの指定（される側）？？ -->
 						<input type="hidden" name="fromurl" value="login/user_login/index"/>
 						<button class="btn btn-primary">login</button>
 					</div>

@@ -5,10 +5,10 @@
 <mapper namespace="com.activiti6.mapper.UserCompanyAccountMapper">
 	<resultMap id="BaseResultMap" type="com.activiti6.po.UserCompanyAccount">
 	    <id column="id" jdbcType="INTEGER" property="id" />
-		<result column="company_name" jdbcType="VARCHAR" property="companyName" />
-	    <result column="bank_name" jdbcType="VARCHAR" property="bankName" />
+		<result column="company_name" jdbcType="VARCHAR" property="company_name" />
+	    <result column="bank_name" jdbcType="VARCHAR" property="bank_name" />
 	    <result column="account" jdbcType="VARCHAR" property="account" />
-	    <result column="account_number" jdbcType="VARCHAR" property="accountNumber" />
+	    <result column="account_number" jdbcType="VARCHAR" property="account_number" />
 	</resultMap>
 	
 	<select id="getUserCompanyAccount" resultType="com.activiti6.po.UserCompanyAccount" parameterType="int">
@@ -16,13 +16,16 @@
 	</select>
 	
 	<insert id="save" useGeneratedKeys="true" keyProperty="id" parameterType="com.activiti6.po.UserCompanyAccount">
-	  insert into user_company_account (id,company_name,bank_name,account,account_number)
-	  values (#{id},#{company_name},#{bank_name},#{account},#{account_number})
+	  insert into user_company_account (id,process_instance_id,company_name,bank_name,account,account_number, user_id,apply_time,manager_check_time,superManager_check_time,remarks)
+	  values (#{id}, #{process_instance_id},#{company_name},#{bank_name},#{account},#{account_number}, #{user_id},#{apply_time},#{manager_check_time},#{superManager_check_time},#{remarks})
 	</insert>
 	
 	<update id="updateByPrimaryKey" parameterType="com.activiti6.po.UserCompanyAccount">
 		 update user_company_account
 	    <set>
+			<if test="process_instance_id != null">
+	        process_instance_id = #{process_instance_id,jdbcType=VARCHAR},
+	      </if>
 	      <if test="company_name != null">
 	        company_name = #{company_name,jdbcType=VARCHAR},
 	      </if>
@@ -34,6 +37,21 @@
 	      </if>
 	      <if test="account_number != null">
 	        account_number = #{account_number,jdbcType=VARCHAR},
+	      </if>
+				<if test="user_id != null">
+	        user_id = #{user_id,jdbcType=VARCHAR},
+	      </if>
+	      <if test="apply_time != null">
+	        apply_time = #{apply_time,jdbcType=VARCHAR},
+	      </if>
+	      <if test="manager_check_time != null">
+	        manager_check_time = #{manager_check_time,jdbcType=VARCHAR},
+	      </if>
+	      <if test="superManager_check_time != null">
+	        superManager_check_time = #{superManager_check_time,jdbcType=VARCHAR},
+	      </if>
+	      <if test="remarks != null">
+	        remarks = #{remarks,jdbcType=VARCHAR},
 	      </if>
 	    </set>
 	    where id = #{id,jdbcType=INTEGER}

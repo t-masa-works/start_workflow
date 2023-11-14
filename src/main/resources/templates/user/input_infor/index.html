@@ -211,6 +211,7 @@
 					<div class="no-move"></div>
 				</div>
 				<div class="box-content">
+					<!-- URL（/startUserRegister）に対してフォームに入力されたデータを送信（post）する -->
 					<form role="form" action="/startUserRegister" method="post">
 							<div class="form-group">
 								<label>username</label>
@@ -260,10 +261,15 @@
 
 <script src="/js/devoops.js"></script>
 <script type="text/javascript">
+	// Webページが完全に読み込まれたら開始
 	$(document).ready(function(){
+		// id="userRegisterApply"がクリックされたら、
 		$("#userRegisterApply").click(function(){
+			// URL（/startUserRegister）に、フォーム内のデータをシリアライズ化して送信する
 			$.post("/startUserRegister",$("form").serialize(),function(){
+				// アラートで、apply successと表示させる
 				alert("apply success");
+				// /user/upload_user_certificateにリダイレクトする
 				document.location = "/user/upload_user_certificate";
 			});
 		});

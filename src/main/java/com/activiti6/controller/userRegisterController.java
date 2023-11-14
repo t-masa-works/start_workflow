@@ -1,5 +1,7 @@
+// packageの宣言
 package com.activiti6.controller;
 
+// packageの読み込み
 import com.activiti6.pagemodel.Process;
 import com.activiti6.pagemodel.*;
 import com.activiti6.po.*;
@@ -37,7 +39,9 @@ import java.util.List;
 import java.util.Map;
 import com.activiti6.service.ProcessInstanceService;
 
+// Springフレームワークのアノテーション
 @Api(value = "user_register")
+// Springでコントローラーとして機能することを示す
 @Controller
 public class userRegisterController {
 	@Autowired
@@ -74,7 +78,9 @@ public class userRegisterController {
 		return "user/upload_user_certificate/index";
 	}
 
+	// /startUserRegisterに送られたPOSTリクエストをこのメソッドで処理する
 	@RequestMapping(value = "/startUserRegister", method = RequestMethod.POST)
+	// シリアライズして送信するアノテーション
 	@ResponseBody
 	public MSG start_user_register(UserRegisterInfo userRegisterInfo, HttpSession session) {
 		String userid = (String) session.getAttribute("username");
