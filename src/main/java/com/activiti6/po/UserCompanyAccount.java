@@ -1,6 +1,7 @@
 package com.activiti6.po;
 
 import java.io.Serializable;
+import javax.validation.constraints.NotBlank;
 
 import org.activiti.engine.task.Task;
 
@@ -11,12 +12,18 @@ import io.swagger.annotations.ApiModelProperty;
 public class UserCompanyAccount implements Serializable {
     @ApiModelProperty("id")
     int id;
+
     @ApiModelProperty("process_instance_id")
 	String process_instance_id;
+
     @ApiModelProperty("company_name")
+    @NotBlank(message = "会社名は必須項目です")
     String company_name;
+
     @ApiModelProperty("bank_name")
+    @NotBlank(message = "銀行名は必須項目です")
     String bank_name;
+
     @ApiModelProperty("account")
     String account;
     @ApiModelProperty("account_number")
