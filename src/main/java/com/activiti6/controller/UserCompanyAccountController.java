@@ -50,14 +50,14 @@ public class UserCompanyAccountController {
 	@Autowired
 	UserCompanyAccountService userCompanyAccountService;
 
-	@RequestMapping(value = "/user/show_company_account", method = RequestMethod.GET)
+	@RequestMapping(value = "/user/input_money/show_company_account", method = RequestMethod.GET)
 	public String showCompanyAccount() {
-		return "/user/show_company_account/index";
+		return "/user/input_money/show_company_account";
 	}
 
 	@RequestMapping(value = "/user/input_money/confirm_money_input", method = RequestMethod.GET)
 	public String confirmMoneyInput() {
-		return "/user/confirm_money_input/index";
+		return "/user/input_money/confirm_money_input";
 	}
 
 	//startcompanyRegisterに送られたPOSTリクエストをこのメソッドで処理する
