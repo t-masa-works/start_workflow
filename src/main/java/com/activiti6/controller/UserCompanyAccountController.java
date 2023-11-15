@@ -50,7 +50,7 @@ public class UserCompanyAccountController {
 	@Autowired
 	UserCompanyAccountService userCompanyAccountService;
 
-	@RequestMapping(value = "/user/input_money/show_company_account", method = RequestMethod.GET)
+	@RequestMapping(value = "/user/show_company_account", method = RequestMethod.GET)
 	public String showCompanyAccount() {
 		return "/user/show_company_account/index";
 	}
