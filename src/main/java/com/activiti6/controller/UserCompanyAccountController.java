@@ -83,7 +83,10 @@ public class UserCompanyAccountController {
 	// シリアライズして送信するアノテーション
 	@ResponseBody
 	public MSG start_company_register(@Valid UserCompanyAccount userCompanyAccount, BindingResult bindingResult, HttpSession session) {
+		System.out.println("Start of start_company_register method");
+		
 		if (bindingResult.hasErrors()) {
+			System.out.println("Validation");
 			return new MSG("failure");
 			}
 			
@@ -92,7 +95,8 @@ public class UserCompanyAccountController {
 		variables.put("applyuserid", userid);
 		ProcessInstance ins = userCompanyAccountService.startWorkflow(userCompanyAccount, userid, variables);
 		System.out.println("user registerThe method startWorkflow(UserCompanyAccount, String, Map< is started. ID:" + ins.getId());
-		return new MSG("sucess");
+		System.out.println("non Validation");
+		return new MSG("success");
 	}
 
 
